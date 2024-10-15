@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import Loader from "./Loader";
 import { FaRegUser } from "react-icons/fa6";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useEffect } from "react";
 
 import {
   DropdownMenu,
@@ -47,7 +48,9 @@ const DataTable = ({
   const [checkedUsers, setCheckedUsers] = useState([]);
   const [unlockLoading, setUnlockLoading] = useState(false);
 
-  console.log(checkedUsers);
+  useEffect(() => {
+    console.log(checkedUsers);
+  }, [checkedUsers]);
 
   const users = useContext(SearchArrayDataProvider);
 
@@ -128,9 +131,16 @@ const DataTable = ({
                 <TableRow key={val.id}>
                   <TableCell>
                     <Checkbox
+                      checked={checkedUsers.some((u) => u.id === val.id)} // Returns true or false
+                      onCheckedChange={(checked) =>
+                        handleCheckboxChange(val, checked)
+                      } // Passes the checked state
+                    />
+
+                    {/* <Checkbox
                       checked={checkedUsers.find((u) => u.id === val.id)}
                       onCheckedChange={() => handleCheckboxChange(val)}
-                    />
+                    /> */}
                   </TableCell>
 
                   <TableCell className={"flex items-center gap-3"}>
