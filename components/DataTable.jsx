@@ -54,7 +54,7 @@ const DataTable = ({
 
   const users = useContext(SearchArrayDataProvider);
 
-  const handleCheckboxChange = (user) => {
+  const handleCheckboxChange = (user, isChecked) => {
     let newCheckedUsers = [...checkedUsers];
     if (newCheckedUsers.find((u) => u.id === user.id)) {
       newCheckedUsers = newCheckedUsers.filter((u) => u.id !== user.id);
