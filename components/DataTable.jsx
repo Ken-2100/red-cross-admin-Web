@@ -38,6 +38,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useEffect } from "react";
 const DataTable = ({
   setUpdate,
   setUpdateId,
@@ -47,7 +48,9 @@ const DataTable = ({
   const [checkedUsers, setCheckedUsers] = useState([]);
   const [unlockLoading, setUnlockLoading] = useState(false);
 
-  console.log(checkedUsers);
+  useEffect(() => {
+    console.log(checkedUsers);
+  }, [checkedUsers]);
 
   const users = useContext(SearchArrayDataProvider);
 
@@ -128,8 +131,10 @@ const DataTable = ({
                 <TableRow key={val.id}>
                   <TableCell>
                     <Checkbox
-                      checked={checkedUsers.find((u) => u.id === val.id)}
-                      onCheckedChange={() => handleCheckboxChange(val)}
+                      checked={checkedUsers.some((u) => u.id === val.id)}
+                      onCheckedChange={(checked) =>
+                        handleCheckboxChange(val, checked)
+                      }
                     />
                   </TableCell>
 
