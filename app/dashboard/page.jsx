@@ -12,6 +12,7 @@ import { SideNavigationProvider } from '@/components/SideNavigationProvider'
 import Analytics from '@/components/Analytics'
 import { toast } from 'react-toastify';
 import InstructorsPage from '@/components/InstructorsPage'
+import UploadCerts from '@/components/UploadCerts'
 const Dashboard = () => {
 
 
@@ -81,6 +82,7 @@ const Dashboard = () => {
         {navigationData.navigation === "analytics" && <Analytics  />}
         {navigationData.navigation === "archive" && <Archives  />}
         {navigationData.navigation === "instructors" && <InstructorsPage  />}
+        {navigationData.navigation === "uploadCerts" && <UploadCerts  />}
 
     </div>
 

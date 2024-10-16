@@ -8,6 +8,8 @@ import { IoArchiveSharp } from "react-icons/io5";
 import { SideNavigationProvider } from './SideNavigationProvider';
 import { SiGoogleanalytics } from "react-icons/si";
 import { FaPeopleGroup } from "react-icons/fa6";
+import { PiCertificate } from "react-icons/pi";
+
 const Sidebar = () => {
 
   const navigation = useContext(SideNavigationProvider)
@@ -29,6 +31,7 @@ const Sidebar = () => {
             <li onClick={() => navigation.setNavigation("analytics")} className={`text-[#141313] ${navigation.navigation === "analytics" ? "bg-red-500 text-white font-bold" : ""} flex items-center px-4 py-3 cursor-pointer rounded text-sm gap-2 w-full`}><SiGoogleanalytics/> ANALYTICS</li>
             <li onClick={() => navigation.setNavigation("archive")} className={`text-[#141313] ${navigation.navigation === "archive" ? "bg-red-500 text-white font-bold" : ""} flex items-center px-4 py-3 cursor-pointer rounded text-sm gap-2 w-full`}><IoArchiveSharp/> ARCHIVES</li>
             <li onClick={() => navigation.setNavigation("instructors")} className={`text-[#141313] ${navigation.navigation === "instructors" ? "bg-red-500 text-white font-bold" : ""} flex items-center px-4 py-3 cursor-pointer rounded text-sm gap-2 w-full`}><FaPeopleGroup/> INSTRUCTORS</li>
+            <li onClick={() => navigation.setNavigation("uploadCerts")} className={`text-[#141313] ${navigation.navigation === "uploadCerts" ? "bg-red-500 text-white font-bold" : ""} flex items-center px-4 py-3 cursor-pointer rounded text-sm gap-2 w-full`}><PiCertificate/> CERTIFICATES</li>
         </ul>
 
 
