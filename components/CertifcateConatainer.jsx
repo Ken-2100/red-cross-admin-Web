@@ -55,7 +55,7 @@ const CertifcateConatainer = ({ name }) => {
           <div style={{  textAlign: 'justify' }}>
            <h2 style={{ textAlign: 'left', marginBottom: '10px', fontSize: '13',fontWeight:"bold" }}>TO WHOM MAY IT CONCENRN:</h2>
             <p style={{fontSize:"16px",lineHeight:2,marginTop:10,textIndent:"100px"}}>
-              This is to certify that <strong>{name.toUpperCase() || 'Sample Name'}</strong> graduated in{' '}
+              This is to certify that <strong>{name || 'Sample Name'}</strong> graduated in{' '}
               <strong>STANDARD FIRST AID AND BLS CPR / AED TRAINING</strong> conducted on ___________________ at
               Philippine Red Cross Dasmariñas City Branch, G/F Units 2 & 3 Amada Building, Emilio Aguinaldo Highway, Barangay Zone IV, Dasmariñas Cavite City, and <strong>PASSED</strong> the evaluating examination given on ____________________.
               The training was conducted under the supervision of Mr. Fernando B. Camacho Jr. and Loida D. Rivera, RN.
