@@ -10,6 +10,8 @@ import axios from "axios";
 import Loader from "./Loader";
 import { FaRegUser } from "react-icons/fa6";
 import { RiDeleteBin7Line } from "react-icons/ri";
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 import {
   Table,
   TableBody,
@@ -41,23 +43,41 @@ const Archives = () => {
     setCurrentUser(null);
   };
 
-  const downloadGroupData = (users, headers) => {
-    const csvContent = [
-      headers.join(","),
-      ...users.map(user => [
-        user.name,
-        user.email,
-        user.category,
-        user.dateStarted,
-        user.address,
-        user.orNumber,
-        user.gender,
-        user.contact,
-      ].map(field => `"${field}"`).join(","))
-    ].join("\n");
 
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8" });
-    saveAs(blob, "group_data.csv");
+  const downloadGroupDataAsPDF = (users, headers) => {
+    // Create a new jsPDF instance
+    const doc = new jsPDF();
+  
+    // Set up the header
+    doc.setFontSize(18); // Set font size for the header
+    doc.text('RedCross Cavite Chapter', 105, 20, { align: 'center' }); // Centered title
+    doc.setFontSize(14);
+    doc.text('List of Graduates', 105, 30, { align: 'center' }); // Centered subtitle
+    
+    // Create some space before the table
+    doc.setFontSize(12);
+  
+    // Create the table rows by mapping over the users array
+    const tableRows = users.map(user => [
+      user.name,
+      user.email,
+      user.category,
+      user.dateStarted,
+      user.address,
+      user.orNumber,
+      user.gender,
+      user.contact,
+    ]);
+  
+    // Generate the table using autoTable, placing it below the header
+    doc.autoTable({
+      head: [headers], // The table headers
+      body: tableRows, // The table body
+      startY: 40, // Start the table below the header (adjust the Y coordinate as needed)
+    });
+  
+    // Save the PDF with the file name 'group_data.pdf'
+    doc.save('group_data.pdf');
   };
 
 
@@ -118,7 +138,7 @@ const Archives = () => {
                   <TableCell className="text-right">
                     <button
                       className="text-lg  gap-2 bg-transparent border-none outline-none"
-                      onClick={() => downloadGroupData(group.users, ["Name", "Email", "Category", "Date Started","Location","Or Number","Gender","Contact Number"])}
+                      onClick={() => downloadGroupDataAsPDF (group.users, ["Name", "Email", "Category", "Date Started","Location","Or Number","Gender","Contact Number"])}
                     >
                       <FiDownload/>
                     </button>

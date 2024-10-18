@@ -111,7 +111,7 @@ const UploadCerts = () => {
                 className="text-xl px-3 py-2 "
                 onClick={handleDownload}
               >
-                DOWNLOAD CERTIFICATE
+                DOWBLOAD CERTIFICATE
               </button>
             </Button>
           </div>

@@ -22,7 +22,7 @@ model UserInfo {
   v                    Int       @map("__v")
   address              String
   category             String
-  certificateUrl       String
+  certificateUrl       String    @default("")
   certificatedApproved Boolean   @default(false)
   contact              String
   dateCreated          DateTime  @default(now()) @db.Date
