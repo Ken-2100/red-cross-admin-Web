@@ -45,7 +45,6 @@ export async function POST(req){
                 category:category,
                 dateStarted:dateStarted,
                 profilePictureUrl:profilePictureUrl,
-                certificateUrl:certificateUrl,
                 gender:gender
             }
         })

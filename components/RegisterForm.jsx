@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import CameraCapture from "./CameraCapture";
+import { useToast } from "@/components/hooks/use-toast";
 import {
   Dialog,
   DialogContent,
@@ -75,38 +76,7 @@ const RegisterForm = ({
     setUserData({ ...userData, category: value });
   };
 
-  const handleDownload = (e) => {
-    e.stopPropagation();
-    const input = document.getElementById("certificate");
-
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-
-      // Create PDF with A4 size and portrait orientation
-      const pdf = new jsPDF("portrait", "pt", "a4");
-
-      // A4 size dimensions in points
-      const pdfWidth = 595.28;
-      const pdfHeight = 1123;
-
-      // Canvas width and height
-      const canvasWidth = 794;
-      const canvasHeight = canvas.height;
-
-      // Calculate the ratio of the canvas to A4 size
-      const ratio = Math.min(pdfWidth / canvasWidth, pdfHeight / canvasHeight);
-
-      // Calculate image dimensions for PDF
-      const imgWidth = canvasWidth * ratio;
-      const imgHeight = canvasHeight * ratio;
-
-      // Add image to the PDF
-      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-
-      // Save the PDF with the name of the user
-      pdf.save(`${userData.name}.pdf`);
-    });
-  };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -114,15 +84,9 @@ const RegisterForm = ({
     await axios
       .post("/api/register", { ...userData, dateStarted: formattedDate })
       .then(() => {
-        toast("Trainee Has Been Added", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        toast({
+          title: "Registration Success!",
+          description: "Successfully Registered Trainee",
         });
 
         setLoading(false);
@@ -334,7 +298,10 @@ const RegisterForm = ({
                   ...userData,
                   profilePictureUrl: res[0].url,
                 });
-                alert("Upload Completed");
+                toast({
+                  title: "Profile Uploaded!",
+                  description: "Successfully Registered Trainee",
+                });
               }}
               onUploadError={(error) => {
                 // Do something with the error.
