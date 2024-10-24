@@ -41,7 +41,7 @@ const UploadCerts = () => {
 
 	useEffect(() => {
 		fetchData();
-	}, [refreshData]); // Now we trigger the effect whenever `refreshData` changes
+	}, [refreshData]); // Now we trigger the effect whenever refreshData changes
 
 	const handleSelectedData = (data) => {
 		setSelectedData(data);
@@ -165,7 +165,7 @@ const UploadCerts = () => {
 								</Button>
 							)}
 						</div>
-
+						<h1>{selectedData?.dateStarted}</h1>
 						<div className="flex w-full flex-col gap-2">
 							<Label htmlFor="uploadProfile">Upload Certificate</Label>
 
