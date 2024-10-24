@@ -76,8 +76,6 @@ const RegisterForm = ({
     setUserData({ ...userData, category: value });
   };
 
-  
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 

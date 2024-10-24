@@ -41,7 +41,7 @@ const UploadCerts = () => {
 
   useEffect(() => {
     fetchData();
-  }, [refreshData]); // Now we trigger the effect whenever `refreshData` changes
+  }, [refreshData]); // Now we trigger the effect whenever refreshData changes
 
   const handleSelectedData = (data) => {
     setSelectedData(data);
@@ -69,7 +69,7 @@ const UploadCerts = () => {
 
       pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
 
-      pdf.save(`${selectedData?.name}.pdf`);
+      pdf.save(`${selectedData?.name}`.pdf);
     });
   };
 
@@ -147,60 +147,52 @@ const UploadCerts = () => {
           <div className="w-1/2 h-full flex flex-col gap-10">
             <h2>{selectedData?.name || "Select Name"}</h2>
             <div>
-
-              {selectedData.name ?  <Button>
-                <button
-                
-                  type="button"
-                  className="text-xl px-3 py-2"
-                  onClick={handleDownload}
-                >
-                  DOWNLOAD CERTIFICATE
-                </button>
-              </Button>
-               : 
-               <Button>
-               <button
-               
-                 type="button"
-                 className="text-xl px-3 py-2"
-                
-               >
-                PLEASE SELECT NAME
-               </button>
-             </Button>
-              }
-             
+              {selectedData.name ? (
+                <Button>
+                  <button
+                    type="button"
+                    className="text-xl px-3 py-2"
+                    onClick={handleDownload}
+                  >
+                    DOWNLOAD CERTIFICATE
+                  </button>
+                </Button>
+              ) : (
+                <Button>
+                  <button type="button" className="text-xl px-3 py-2">
+                    PLEASE SELECT NAME
+                  </button>
+                </Button>
+              )}
             </div>
-
+            <h1>{selectedData?.dateStarted}</h1>
             <div className="flex w-full flex-col gap-2">
-  <Label htmlFor="uploadProfile">Upload Certificate</Label>
+              <Label htmlFor="uploadProfile">Upload Certificate</Label>
 
-  {/* Conditionally render the UploadButton based on selectedData.name */}
-  {selectedData.name ? (
-    <Button className="h-16" asChild>
-      <UploadButton
-        endpoint="pdfUploader"
-        onClientUploadComplete={(res) => {
-          console.log("Files: ", res[0].url);
-          setCertificate(res[0].url);
-          toast({
-            title: "Certificate Uploaded",
-            description: "Certificate is successfully uploaded",
-          });
-        }}
-        onUploadError={(error) => {
-          alert(`ERROR! ${error.message}`);
-        }}
-      />
-    </Button>
-  ) : (
-    <Button disabled className="h-16">
-      Upload Button Disabled (Select a Name)
-    </Button>
-  )}
-</div>
-
+              {/* Conditionally render the UploadButton based on selectedData.name */}
+              {selectedData.name ? (
+                <Button className="h-16" asChild>
+                  <UploadButton
+                    endpoint="pdfUploader"
+                    onClientUploadComplete={(res) => {
+                      console.log("Files: ", res[0].url);
+                      setCertificate(res[0].url);
+                      toast({
+                        title: "Certificate Uploaded",
+                        description: "Certificate is successfully uploaded",
+                      });
+                    }}
+                    onUploadError={(error) => {
+                      alert(`ERROR! ${error.message}`);
+                    }}
+                  />
+                </Button>
+              ) : (
+                <Button disabled className="h-16">
+                  Upload Button Disabled (Select a Name)
+                </Button>
+              )}
+            </div>
 
             <div className="flex w-full flex-col gap-2">
               <Label htmlFor="uploadProfile">Submit Certificate</Label>
@@ -210,7 +202,7 @@ const UploadCerts = () => {
                   onClick={handleSubmit}
                   className="w-full bg-red-500 h-16 hover:bg-red-600"
                 >
-                 {certificateLoading ? "LOADING..." :"SUBMIT"}
+                  {certificateLoading ? "LOADING..." : "SUBMIT"}
                 </button>
               </Button>
             </div>
