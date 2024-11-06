@@ -16,6 +16,12 @@ import { Button } from "@/components/ui/button";
 import Loader from "./Loader";
 import { FaRegUser } from "react-icons/fa6";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import {
   DropdownMenu,
@@ -99,15 +105,24 @@ const DataTable = ({
             <strong>{users.finalUsers.length}</strong>
             {users.finalUsers.length === 1 ? " Trainee" : " Trainees"}
           </h2>
-          <Button asChild>
-            <button
-              onClick={handleBulkUnlock}
-              className="bg-red-900 text-white py-2 px-4 rounded"
-              disabled={checkedUsers.length === 0}
-            >
-              {unlockLoading ? <Loader /> : "Unlock Certificate"}
-            </button>
-          </Button>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <Button asChild>
+                  <button
+                    onClick={handleBulkUnlock}
+                    className="bg-red-900 text-white py-2 px-4 rounded"
+                    disabled={checkedUsers.length === 0}
+                  >
+                    {unlockLoading ? <Loader /> : "Unlock Certificate"}
+                  </button>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                Unlock the selected trainee's in their mobile app
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
         <div className="w-full h-[400px] overflow-auto">
           <Table>
