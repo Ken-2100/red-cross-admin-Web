@@ -10,13 +10,13 @@ import { useToast } from "@/components/hooks/use-toast";
 
 const UploadCerts = () => {
   const { toast } = useToast();
-  const [usersWithNoCerts, setUserWithNoCerts] = useState([]); // Ensure it's initialized as an array
+  const [usersWithNoCerts, setUserWithNoCerts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedData, setSelectedData] = useState({});
   const [certificate, setCertificate] = useState("");
   const [certificateLoading, setCertificateLoading] = useState(false);
-  const [refreshData, setRefreshData] = useState(false); // Added refresh trigger
-  const [searchQuery, setSearchQuery] = useState("");
+  const [refreshData, setRefreshData] = useState(false);
+  const [searchQuery, setSearchQuery] = useState(""); // Added search query state
 
   const fetchData = async () => {
     try {
@@ -24,25 +24,22 @@ const UploadCerts = () => {
         "http://localhost:3000/api/getAllUserWithNoCerts"
       );
       const data = await response.json();
-      console.log(data);
-
-      // Ensure the fetched data is an array before setting the state
       if (Array.isArray(data)) {
         setUserWithNoCerts(data);
       } else {
-        setUserWithNoCerts([]); // Set to empty array if data is not an array
+        setUserWithNoCerts([]);
       }
       setLoading(false);
     } catch (error) {
       console.error("Failed to fetch session data:", error);
-      setUserWithNoCerts([]); // Set to empty array in case of error
+      setUserWithNoCerts([]);
       setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchData();
-  }, [refreshData]); // Now we trigger the effect whenever refreshData changes
+  }, [refreshData]);
 
   const handleSelectedData = (data) => {
     setSelectedData(data);
@@ -54,22 +51,16 @@ const UploadCerts = () => {
 
     html2canvas(input).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
-
       const pdf = new jsPDF("portrait", "pt", "a4");
-
       const pdfWidth = 595.28;
       const pdfHeight = 1123;
-
       const canvasWidth = 794;
       const canvasHeight = canvas.height;
-
       const ratio = Math.min(pdfWidth / canvasWidth, pdfHeight / canvasHeight);
-
       const imgWidth = canvasWidth * ratio;
       const imgHeight = canvasHeight * ratio;
 
       pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-
       pdf.save(`${selectedData?.name}.pdf`);
     });
   };
@@ -83,15 +74,12 @@ const UploadCerts = () => {
       );
 
       if (result.status === 200) {
-        console.log("Certificate updated successfully:", result.data);
         setCertificateLoading(false);
         toast({
           title: "Certificate Submitted",
           description: "Certificate has been submitted to trainee",
         });
-
-        // Trigger data refresh after successful submission
-        setRefreshData((prev) => !prev); // Toggle refreshData to trigger useEffect
+        setRefreshData((prev) => !prev);
       } else {
         console.log("Update failed:", result.data);
       }
@@ -100,6 +88,11 @@ const UploadCerts = () => {
       alert("Failed to update certificate. Please try again later.");
     }
   };
+
+  // Filtered users based on the search query
+  const filteredUsers = usersWithNoCerts.filter((user) =>
+    user.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="w-full h-full p-5">
@@ -120,13 +113,23 @@ const UploadCerts = () => {
         </div>
       ) : (
         <section className="w-full flex justify-between h-full items-center">
-          <div className="w-[1/2]  grid grid-cols-2 gap-5 mt-10">
-            {usersWithNoCerts.length === 0 ? (
+          <div className="w-[1/2] grid grid-cols-2 gap-5 mt-10">
+            <div className="col-span-6 w-full mb-4">
+              <Label>Search Name</Label>
+              <input
+                type="text"
+                placeholder="Search by name..."
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            {filteredUsers.length === 0 ? (
               <div>
                 <h2>No Data Available</h2>
               </div>
             ) : (
-              usersWithNoCerts.map((val) => (
+              filteredUsers.map((val) => (
                 <div className="flex items-center" key={val.id}>
                   <div className="flex w-full flex-col gap-2">
                     <Label htmlFor="downloadCert">{val.name}</Label>
@@ -146,7 +149,10 @@ const UploadCerts = () => {
           </div>
 
           <div className="w-1/2 h-full flex flex-col gap-10">
-            <h2>{selectedData?.name || "Select Name"}</h2>
+            <h2 className="flex flex-col">
+              <strong>Name</strong>
+              {selectedData?.name || "Select Name"}
+            </h2>
             <div>
               {selectedData.name ? (
                 <Button>
@@ -166,17 +172,14 @@ const UploadCerts = () => {
                 </Button>
               )}
             </div>
-            <h1>{selectedData?.dateStarted}</h1>
+            {/* <h1>{selectedData?.dateStarted}</h1> */}
             <div className="flex w-full flex-col gap-2">
               <Label htmlFor="uploadProfile">Upload Certificate</Label>
-
-              {/* Conditionally render the UploadButton based on selectedData.name */}
               {selectedData.name ? (
                 <Button className="h-16" asChild>
                   <UploadButton
                     endpoint="pdfUploader"
                     onClientUploadComplete={(res) => {
-                      console.log("Files: ", res[0].url);
                       setCertificate(res[0].url);
                       toast({
                         title: "Certificate Uploaded",
