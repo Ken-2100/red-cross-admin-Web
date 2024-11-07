@@ -138,7 +138,9 @@ const InstructorsPage = () => {
 
   return (
     <div className="h-[600px] overflow-auto w-full p-5">
-      <h1 className="mb-10 text-xl">Instructors {getYear()} Performance:</h1>
+      <h1 className="mb-10 text-xl">
+        Instructors <strong>{getYear()}</strong> Performance:
+      </h1>
       {loading ? (
         <div className="flex flex-col gap-10 items-center justify-center">
           <div className="grid grid-cols-2 gap-10">
