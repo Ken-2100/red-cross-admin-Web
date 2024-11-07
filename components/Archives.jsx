@@ -45,16 +45,60 @@ const Archives = () => {
     // Create a new jsPDF instance
     const doc = new jsPDF();
 
-    // Set up the header
-    doc.setFontSize(18); // Set font size for the header
-    doc.text("RedCross Cavite Chapter", 105, 20, { align: "center" }); // Centered title
+    // Set up the header with logo and text
+    const imgWidth = 40;
+    const imgHeight = 40;
+    const logoX = 60; // X position for the logo image
+    const logoY = 10; // Y position for the logo image
+    const centerX = 105; // Center X position for text
+
+    // Insert the logo image
+    // Replace "path/to/logo.png" with the actual path or Base64 string for the logo
+    doc.addImage(
+      "/public/assets/white logo.png",
+      "PNG",
+      logoX,
+      logoY,
+      imgWidth,
+      imgHeight
+    );
+
+    // Set up the text elements for the header
+    doc.setFontSize(18);
+    doc.setTextColor(0, 51, 153); // Dark blue for the main title
+    doc.text("PHILIPPINE RED CROSS", centerX, 20, { align: "center" });
+
+    doc.setFontSize(16);
+    doc.setTextColor(0, 51, 153); // Dark blue
+    doc.text("CAVITE CHAPTER", centerX, 28, { align: "center" });
+
     doc.setFontSize(14);
-    doc.text("List of Graduates", 105, 30, { align: "center" }); // Centered subtitle
+    doc.setTextColor(255, 102, 102); // Red for the branch subtitle
+    doc.text("DASMARIÑAS CITY BRANCH", centerX, 36, { align: "center" });
 
-    // Create some space before the table
-    doc.setFontSize(12);
+    // Address lines
+    doc.setFontSize(10);
+    doc.setTextColor(0, 51, 153); // Dark blue
+    doc.text("Ground Floor, Units 2 & 3, Amada Building", centerX, 44, {
+      align: "center",
+    });
+    doc.text(
+      "Emilio Aguinaldo Highway, Barangay Zone IV, Dasmariñas Cavite City",
+      centerX,
+      52,
+      { align: "center" }
+    );
+    doc.text("Tel No. (046) 4026267", centerX, 60, { align: "center" });
+    doc.text("cavitedasmariñas@redcross.org.ph", centerX, 68, {
+      align: "center",
+    });
 
-    // Create the table rows by mapping over the users array
+    // Section title (e.g., "List of Graduates")
+    doc.setFontSize(14);
+    doc.setTextColor(0, 0, 0); // Black for the section title
+    doc.text("List of Graduates", centerX, 80, { align: "center" });
+
+    // Table header row configuration
     const tableRows = users.map((user) => [
       user.name,
       user.email,
@@ -70,7 +114,8 @@ const Archives = () => {
     doc.autoTable({
       head: [headers], // The table headers
       body: tableRows, // The table body
-      startY: 40, // Start the table below the header (adjust the Y coordinate as needed)
+      startY: 90, // Start the table below the header (adjust the Y coordinate as needed)
+      margin: { top: 10 },
     });
 
     // Save the PDF with the file name 'group_data.pdf'

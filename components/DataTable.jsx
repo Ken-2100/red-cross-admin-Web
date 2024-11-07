@@ -16,12 +16,6 @@ import { Button } from "@/components/ui/button";
 import Loader from "./Loader";
 import { FaRegUser } from "react-icons/fa6";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 import {
   DropdownMenu,
@@ -105,24 +99,22 @@ const DataTable = ({
             <strong>{users.finalUsers.length}</strong>
             {users.finalUsers.length === 1 ? " Trainee" : " Trainees"}
           </h2>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <Button asChild>
-                  <button
-                    onClick={handleBulkUnlock}
-                    className="bg-red-900 text-white py-2 px-4 rounded"
-                    disabled={checkedUsers.length === 0}
-                  >
-                    {unlockLoading ? <Loader /> : "Unlock Certificate"}
-                  </button>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                Unlock the selected trainee's in their mobile app
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+
+          <div className="relative inline-block group">
+            <Button asChild>
+              <button
+                onClick={handleBulkUnlock}
+                className="bg-red-700 text-white py-2 px-4 rounded focus:opacity-[0.85] transition-all shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/50 disabled:pointer-events-none disabled:opacity-50"
+                disabled={checkedUsers.length === 0}
+              >
+                {unlockLoading ? <Loader /> : "Unlock Certificate"}
+              </button>
+            </Button>
+
+            <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap rounded-lg bg-red-700 py-1.5 px-3 font-sans text-sm font-normal text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none">
+              Select a trainee
+            </div>
+          </div>
         </div>
         <div className="w-full h-[400px] overflow-auto">
           <Table>

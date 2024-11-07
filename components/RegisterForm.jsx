@@ -31,12 +31,6 @@ import {
 } from "@/components/ui/select";
 
 import DatePicker from "./DatePicker";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 const RegisterForm = ({
   loading,
@@ -268,103 +262,97 @@ const RegisterForm = ({
             </Select>
           </div>
 
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <div className="flex flex-col gap-2 w-full ">
-                  <Label htmlFor="picture">Profile Picture</Label>{" "}
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button variant="outline">Take A Picture</Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-[425px]">
-                      <CameraCapture name={userData?.name} />
-                    </DialogContent>
-                  </Dialog>{" "}
-                </div>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Enable camera & preview capture</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
-
-        <div className="flex w-full flex-col gap-2">
-          <Label htmlFor="uploadProfile">Upload Profile Picture</Label>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                {" "}
-                <Button
-                  className="border hover:bg-red-600 flex items-center justify-center h-24 border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  asChild
-                >
-                  <UploadButton
-                    endpoint="imageUploader"
-                    appearance={{
-                      button: {
-                        padding: "8px",
-                        color: "black",
-                      },
-                    }}
-                    onClientUploadComplete={(res) => {
-                      // Do something with the response
-                      console.log("Files: ", res[0].url);
-                      setUserData({
-                        ...userData,
-                        profilePictureUrl: res[0].url,
-                      });
-                      toast({
-                        title: "Profile Uploaded!",
-                        description: "Successfully Registered Trainee",
-                      });
-                    }}
-                    onUploadError={(error) => {
-                      // Do something with the error.
-                      alert(`ERROR! ${error.message}`);
-                    }}
-                  />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Upload the picture after taking it.</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
-
-        <div className="w-full h-full flex items-center justify-center">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <Button asChild>
-                  <button
-                    disabled={
-                      !userData.orNumber ||
-                      !userData.name ||
-                      !userData.email ||
-                      !userData.password ||
-                      !userData.address ||
-                      !userData.contact ||
-                      !userData.category
-                    }
-                    onClick={() => setLoading(true)}
-                    className="w-full cursor-pointer col-span-2 py-3 h-16  px-3 rounded bg-red-600 hover:bg-red-800 text-white"
+          <div className="relative inline-block group">
+            <div className="flex flex-col gap-2 w-full ">
+              <Label htmlFor="picture">Profile Picture</Label>{" "}
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="bg-red-700 hover:bg-red-500"
                   >
-                    {update
-                      ? "update"
-                      : loading
-                      ? "Adding Trainee..."
-                      : "Add Trainee"}
-                  </button>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Please fill out all fields to enable submission.</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+                    <p className="text-white">Take a Picture</p>
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <CameraCapture name={userData?.name} />
+                </DialogContent>
+              </Dialog>{" "}
+              {/* Tooltip with Group Hover Control */}
+              <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap rounded-lg bg-red-700 py-1.5 px-3 font-sans text-sm font-normal text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none">
+                <p>Open your device camera</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative inline-block group">
+          <div className="flex w-full flex-col gap-2">
+            <Label htmlFor="uploadProfile">Upload Profile Picture</Label>
+            <Button
+              className="border-red-700 border-2 bg-white text-black hover:bg-red-500 hover:text-white flex items-center justify-center h-24 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              asChild
+            >
+              <UploadButton
+                endpoint="imageUploader"
+                appearance={{
+                  button: {
+                    padding: "8px",
+                    color: "black",
+                  },
+                }}
+                onClientUploadComplete={(res) => {
+                  // Do something with the response
+                  console.log("Files: ", res[0].url);
+                  setUserData({
+                    ...userData,
+                    profilePictureUrl: res[0].url,
+                  });
+                  toast({
+                    title: "Profile Uploaded!",
+                    description: "Successfully Registered Trainee",
+                  });
+                }}
+                onUploadError={(error) => {
+                  // Handle the error.
+                  alert(`ERROR! ${error.message}`);
+                }}
+              />
+            </Button>
+          </div>
+
+          <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap rounded-lg bg-red-700 py-1.5 px-3 font-sans text-sm font-normal text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none">
+            <p>Take a picture first then upload it here</p>
+          </div>
+        </div>
+
+        <div className="relative inline-block group">
+          <div className="w-full h-full flex items-center justify-center">
+            <Button asChild>
+              <button
+                disabled={
+                  !userData.orNumber ||
+                  !userData.name ||
+                  !userData.email ||
+                  !userData.password ||
+                  !userData.address ||
+                  !userData.contact ||
+                  !userData.category
+                }
+                onClick={() => setLoading(true)}
+                className="w-full cursor-pointer col-span-2 py-3 h-16  px-3 rounded bg-red-600 hover:bg-red-800 text-white"
+              >
+                {update
+                  ? "update"
+                  : loading
+                  ? "Adding Trainee..."
+                  : "Add Trainee"}
+              </button>
+            </Button>
+            <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap rounded-lg bg-red-700 py-1.5 px-3 font-sans text-sm font-normal text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none">
+              <p>Please fill out all fields to enable submission.</p>
+            </div>
+          </div>
         </div>
       </form>
     </>
