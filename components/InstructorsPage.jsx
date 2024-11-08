@@ -30,9 +30,10 @@ const InstructorsPage = () => {
         }
 
         const data = await response.json(); // Assuming the API returns JSON data
-
+        console.log(data);
         setInstructorRatings(data); // Set the state with the fetched data
         setLoading(false);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -135,7 +136,7 @@ const InstructorsPage = () => {
     const year = date.getFullYear();
     return year;
   };
-
+  console.log(userRatings);
   return (
     <div className="h-[600px] overflow-auto w-full p-5">
       <h1 className="mb-10 text-xl">

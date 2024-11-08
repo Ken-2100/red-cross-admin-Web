@@ -16,7 +16,67 @@ const UploadCerts = () => {
   const [certificate, setCertificate] = useState("");
   const [certificateLoading, setCertificateLoading] = useState(false);
   const [refreshData, setRefreshData] = useState(false);
-  const [searchQuery, setSearchQuery] = useState(""); // Added search query state
+  const [searchQuery, setSearchQuery] = useState("");
+  const CertificatePreview = ({ selectedData }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const toggleModal = () => {
+      setIsModalOpen(!isModalOpen);
+    };
+
+    return (
+      <div className="flex flex-col items-center justify-center">
+        {/* Button to Open Modal */}
+        <button
+          onClick={toggleModal}
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4"
+        >
+          Preview Certificate
+        </button>
+
+        {/* Modal */}
+        {isModalOpen && (
+          <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl p-5 lg:w-2/3 xl:w-1/2">
+              {/* Modal Header */}
+              <div className="flex justify-between items-center border-b pb-3">
+                <h2 className="text-xl font-bold">Certificate Preview</h2>
+                <button
+                  onClick={toggleModal}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  &times;
+                </button>
+              </div>
+
+              {/* Modal Content */}
+              <div className="mt-5 flex justify-center items-center overflow-auto max-h-[80vh]">
+                <div className="w-full max-w-[95%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]">
+                  <CertifcateConatainer
+                    name={
+                      selectedData?.name
+                        ? selectedData.name.toUpperCase()
+                        : "No Certificate Selected"
+                    }
+                  />
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="flex justify-end mt-5">
+                <button
+                  onClick={toggleModal}
+                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   const fetchData = async () => {
     try {
@@ -106,6 +166,7 @@ const UploadCerts = () => {
 
       <div>
         <h2 className="text-2xl font-bold">Upload Certificates</h2>
+        <CertificatePreview selectedData={selectedData} />
       </div>
       {loading ? (
         <div>

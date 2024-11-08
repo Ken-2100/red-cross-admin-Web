@@ -77,7 +77,7 @@ export async function GET() {
         ...instructor, // Spread instructor details (e.g., name, email)
         ratings: stats.ratingCounts, // Add rating counts (sum of rate1, rate2, etc.)
         totalRatings: stats.totalRatings, // Add total number of all ratings
-        userRatingCount: stats.userIds.size - 1, // Total unique users who rated this instructor
+        userRatingCount: stats.userIds.size, // Total unique users who rated this instructor
       };
     });
 

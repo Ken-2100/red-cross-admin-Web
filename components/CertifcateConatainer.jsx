@@ -1,36 +1,35 @@
 import React from "react";
 import Image from "next/image";
 
-const CertifcateConatainer = ({ name, date, dateStarted }) => {
+const CertificateContainer = ({ name, date, dateStarted }) => {
   return (
     <div
       id="certificate"
       style={{
-        width: "794px", // A4 width (in pixels at 96 DPI)
-        height: "1123px", // A4 height (in pixels at 96 DPI)
+        width: "794px", // A4 width in pixels at 96 DPI
+        height: "1123px", // A4 height in pixels at 96 DPI
         margin: "0 auto",
         padding: "20px",
         border: "10px solid #ddd",
-        backgroundColor: "white", // Set white backgroun
+        backgroundColor: "white",
         fontFamily: "serif",
-        position: "absolute",
-        top: "-5000px",
-        left: "0",
+
+        overflow: "hidden",
       }}
     >
       <div
         style={{
           width: "100%",
-          height: "100%",
+          height: "calc(100% - 50px)", // Adjusted height to accommodate footer
           border: "5px solid #aaa",
           padding: "30px",
-          position: "relative",
+
           boxSizing: "border-box",
         }}
       >
         {/* Logo and Header */}
         <div
-          className="flex items-center justify-center gap-6 "
+          className="flex items-center justify-center gap-6"
           style={{ marginBottom: "40px" }}
         >
           <div className="relative w-28 h-28">
@@ -44,10 +43,7 @@ const CertifcateConatainer = ({ name, date, dateStarted }) => {
 
           <div>
             <h1
-              style={{
-                fontSize: "20px",
-                textAlign: "center",
-              }}
+              style={{ fontSize: "20px", textAlign: "center" }}
               className="text-blue-900"
             >
               PHILIPPINE RED CROSS
@@ -95,12 +91,12 @@ const CertifcateConatainer = ({ name, date, dateStarted }) => {
         </div>
 
         {/* Certification Section */}
-        <div style={{ marginTop: "80px" }}>
+        <div style={{ marginTop: "20px" }}>
           <h2
             style={{
               textAlign: "center",
-              marginBottom: "18px",
-              fontSize: "25",
+              marginBottom: "0px",
+              fontSize: "25px",
               fontWeight: "bold",
             }}
           >
@@ -110,18 +106,18 @@ const CertifcateConatainer = ({ name, date, dateStarted }) => {
             <h2
               style={{
                 textAlign: "left",
-                marginBottom: "10px",
-                fontSize: "13",
+                marginBottom: "18px",
+                fontSize: "13px",
                 fontWeight: "bold",
               }}
             >
-              TO WHOM MAY IT CONCENRN:
+              TO WHOM MAY IT CONCERN:
             </h2>
             <p
               style={{
                 fontSize: "16px",
                 lineHeight: 2,
-                marginTop: 10,
+                marginTop: "10px",
                 textIndent: "100px",
               }}
             >
@@ -153,7 +149,7 @@ const CertifcateConatainer = ({ name, date, dateStarted }) => {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            marginTop: "100px",
+            marginTop: "50px",
           }}
         >
           <div>
@@ -174,16 +170,29 @@ const CertifcateConatainer = ({ name, date, dateStarted }) => {
           </div>
         </div>
       </div>
-
-      {/* <div className="w-full h-[50px] p-10 flex items-center absolute bg-red-600 bottom-0 left-0"> */}
-      {/* <p style={{ fontSize: "25px", color: "white" }}> */}
-      <div className="w-full h-12 p-4 flex items-center bg-red-600 absolute bottom-0 left-0">
-        <p className="text-white text-xl italic">
-          <i> Always First, Always Ready, Always There!</i>
+      {/* Footer Section */}
+      <div
+        style={{
+          width: "100%",
+          height: "50px",
+          padding: "10px",
+          backgroundColor: "#dc2626",
+          bottom: "10px",
+          left: "0",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "absolute",
+          top: "0",
+          overflow: "hidden",
+        }}
+      >
+        <p style={{ color: "white", fontSize: "16px", fontStyle: "italic" }}>
+          Always First, Always Ready, Always There!
         </p>
       </div>
     </div>
   );
 };
 
-export default CertifcateConatainer;
+export default CertificateContainer;
