@@ -11,12 +11,12 @@ const ourFileRouter = {
    
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete for userId:", metadata.userId);
+      // console.log("Upload complete for userId:", metadata.userId); ken
 
-      console.log("file url", file.url);
+      // console.log("file url", file.url); ken
 
 
-      console.log("i will create a mongogdb user connection here")
+      // console.log("i will create a mongogdb user connection here") ken
 
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
       return { uploadedBy: metadata.userId };
@@ -26,9 +26,9 @@ const ourFileRouter = {
    
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete PDF FILE:", metadata.userId);
+      // console.log("Upload complete PDF FILE:", metadata.userId); ken
 
-      console.log("file url", file.url);
+      // console.log("file url", file.url); ken
 
 
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
@@ -48,4 +48,4 @@ export const OurFileRouter = ourFileRouter;
 
 
 
-console.log(OurFileRouter);
+// console.log(OurFileRouter); ken

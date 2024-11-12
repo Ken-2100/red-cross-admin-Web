@@ -25,7 +25,7 @@ export async function GET() {
     };
   });
 
-  console.log(result);
+  // console.log(result); ken
 
   return NextResponse.json(result);
 }

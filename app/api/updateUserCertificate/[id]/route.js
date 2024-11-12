@@ -15,7 +15,7 @@ export async function PUT(req,{params}){
         }
     })
 
-    console.log(user);
+    // console.log(user);
 
     if(!user){
         return NextResponse.json({message:"no user found"})
@@ -31,7 +31,7 @@ export async function PUT(req,{params}){
 
     })
 
-    console.log(updatedUser)
+    // console.log(updatedUser) ken
 
 
     return NextResponse.json({message:"certificate uploaded"})

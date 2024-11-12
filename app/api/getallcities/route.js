@@ -55,7 +55,7 @@ export  async function GET() {
 const data = await getGroupedCategories();
   
 
-console.log(data);
+// console.log(data); ken 
   return NextResponse.json(data);
       
 }

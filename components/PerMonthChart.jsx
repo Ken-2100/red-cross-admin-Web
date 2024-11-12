@@ -81,7 +81,7 @@ export default function PerMonthChart() {
         }
 
         const data = await response.json(); // Assuming the API returns JSON data
-        console.log(data);
+        // console.log(data); ken
         setPermonthData(data); // Set the state with the fetched data
         setLoading(false);
       } catch (error) {

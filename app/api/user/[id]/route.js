@@ -10,7 +10,7 @@ export async function DELETE(req,{params}){
         }
     })
 
-    console.log(`deleted user ${deletedUser.name}`);
+    // console.log(`deleted user ${deletedUser.name}`); ken
 
     return NextResponse.json({message:"user deleted"});
 
@@ -26,7 +26,7 @@ export async function GET(req,{params}){
         }
     })
 
-    console.log(`get user ${getUser.name}`);
+    // console.log(`get user ${getUser.name}`); ken
 
     return NextResponse.json(getUser);
 

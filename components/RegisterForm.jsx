@@ -303,7 +303,7 @@ const RegisterForm = ({
                 }}
                 onClientUploadComplete={(res) => {
                   // Do something with the response
-                  console.log("Files: ", res[0].url);
+                  // console.log("Files: ", res[0].url); ken
                   setUserData({
                     ...userData,
                     profilePictureUrl: res[0].url,

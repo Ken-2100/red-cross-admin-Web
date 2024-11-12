@@ -14,6 +14,6 @@ export async function GET() {
         return NextResponse.json({message:"no user ratings available"});
     }
 
-    console.log(userRatings);
+    // console.log(userRatings); ken
     return NextResponse.json(userRatings);
 }

@@ -71,7 +71,7 @@ export async function GET() {
     const rankedInstructors = instructorDetails.map((instructor) => {
       const stats = instructorStats[instructor.id];
 
-      console.log("new data",stats)
+      // console.log("new data",stats) ken
 
       return {
         ...instructor, // Spread instructor details (e.g., name, email)

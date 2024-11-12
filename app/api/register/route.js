@@ -8,7 +8,7 @@ export async function POST(req){
     const {name,email,password,address,contact,category,gender,dateStarted,profilePictureUrl,orNumber} = body;
 
 
-    console.log(gender);
+    // console.log(gender); ken
 
 
     if(!name || !email || !password || !address || !contact || !category || !dateStarted || !gender){ //validate input 

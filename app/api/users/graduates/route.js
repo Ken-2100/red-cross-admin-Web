@@ -11,8 +11,8 @@ export async function PATCH(req,{params}){
 
     const { formattedDate, userIds } = await req.json();
 
-    console.log(formattedDate);
-    console.log(userIds);
+    // console.log(formattedDate); ken
+    // console.log(userIds); ken 
     
     const updateUsers = await prisma.userInfo.updateMany({
         where: {
@@ -26,7 +26,6 @@ export async function PATCH(req,{params}){
         }
     });
     
-    console.log(updateUsers);
-
+    // console.log(updateUsers); ken  
     return NextResponse.json({message:"update success"});
 }

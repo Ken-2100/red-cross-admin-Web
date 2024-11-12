@@ -30,12 +30,12 @@ const InstructorsPage = () => {
         }
 
         const data = await response.json(); // Assuming the API returns JSON data
-        console.log(data);
+        // console.log(data); ken
         setInstructorRatings(data); // Set the state with the fetched data
         setLoading(false);
-        console.log(data);
+        // console.log(data); ken
       } catch (error) {
-        console.error("Error fetching data:", error);
+        // console.error("Error fetching data:", error); ken
       }
     }
 
@@ -54,11 +54,11 @@ const InstructorsPage = () => {
         }
 
         const data = await response.json(); // Assuming the API returns JSON data
-        console.log(data);
+        // console.log(data); ken
         setAllUserRatings(data); // Set the state with the fetched data
         setUserRatingLoading(false);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        // console.error("Error fetching data:", error); ken
       }
     }
 
@@ -66,11 +66,11 @@ const InstructorsPage = () => {
   }, [instructorId]);
 
   const handleRatingRange = (rating, numberOfUsers) => {
-    console.log(`Rating: ${rating}, Number of Users: ${numberOfUsers}`);
+    // console.log(`Rating: ${rating}, Number of Users: ${numberOfUsers}`); ken
 
     // Calculate the maximum possible ratings
     const maxRating = 5 * numberOfUsers;
-    console.log(`Max Rating: ${maxRating}`);
+    // console.log(`Max Rating: ${maxRating}`); ken
 
     // Calculate the final rating percentage
     const finalRating = rating / maxRating;
@@ -136,7 +136,7 @@ const InstructorsPage = () => {
     const year = date.getFullYear();
     return year;
   };
-  console.log(userRatings);
+  // console.log(userRatings); ken
   return (
     <div className="h-[600px] overflow-auto w-full p-5">
       <h1 className="mb-10 text-xl">
