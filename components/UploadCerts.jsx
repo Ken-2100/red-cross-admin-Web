@@ -193,7 +193,7 @@ const UploadCerts = () => {
               <div className="w-[500px] mt-0 h-80 overflow-y-auto border border-gray-300 rounded-md">
                 <table className="table-auto w-full">
                   <thead>
-                    <tr className="bg-gray-200">
+                    <tr className="bg-slate-950 text-white">
                       <th className="px-4 py-2 border">Name</th>
                       <th className="px-4 py-2 border">Action</th>
                     </tr>
@@ -210,14 +210,12 @@ const UploadCerts = () => {
                         <tr key={val.id} className="text-center border-b">
                           <td className="px-4 py-2 border">{val.name}</td>
                           <td className="px-4 py-2 border">
-                            <Button>
-                              <button
-                                type="button"
-                                className="text-xl w-[100px]"
-                                onClick={(e) => handleSelectedData({ ...val })}
-                              >
-                                SELECT
-                              </button>
+                            <Button
+                              type="button"
+                              className=" w-[100px] bg-red-600"
+                              onClick={(e) => handleSelectedData({ ...val })}
+                            >
+                              SELECT
                             </Button>
                           </td>
                         </tr>
