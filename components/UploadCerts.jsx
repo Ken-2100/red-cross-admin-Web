@@ -164,8 +164,8 @@ const UploadCerts = () => {
         }
       />
 
-      <div>
-        <h2 className="text-2xl font-bold mt-5">Upload Certificates</h2>
+      <div className="mt-5">
+        <h2 className="text-2xl font-bold">Upload Certificates</h2>
         {/* <CertificatePreview selectedData={selectedData} /> */}
       </div>
       {loading ? (
@@ -173,9 +173,9 @@ const UploadCerts = () => {
           <h2>Loading...</h2>
         </div>
       ) : (
-        <section className="w-full flex justify-between h-full items-center">
-          <div className="w-[500px] grid grid-cols-2 gap-5 mt-10">
-            <div className="col-span-6 w-full mb-2">
+        <section className="w-full flex justify-between h-full ">
+          <div className="w-[500px] grid grid-cols-2 mt-2">
+            <div className="col-span-6 w-full">
               <Label>Search Name</Label>
               <input
                 type="text"
