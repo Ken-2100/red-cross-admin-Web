@@ -165,7 +165,7 @@ const UploadCerts = () => {
       />
 
       <div>
-        <h2 className="text-2xl font-bold">Upload Certificates</h2>
+        <h2 className="text-2xl font-bold mt-5">Upload Certificates</h2>
         {/* <CertificatePreview selectedData={selectedData} /> */}
       </div>
       {loading ? (
@@ -174,8 +174,8 @@ const UploadCerts = () => {
         </div>
       ) : (
         <section className="w-full flex justify-between h-full items-center">
-          <div className="w-[1/2] grid grid-cols-2 gap-5 mt-10">
-            <div className="col-span-6 w-full mb-4">
+          <div className="w-[500px] grid grid-cols-2 gap-5 mt-10">
+            <div className="col-span-6 w-full mb-2">
               <Label>Search Name</Label>
               <input
                 type="text"
@@ -190,22 +190,42 @@ const UploadCerts = () => {
                 <h2>No Data Available</h2>
               </div>
             ) : (
-              filteredUsers.map((val) => (
-                <div className="flex items-center" key={val.id}>
-                  <div className="flex w-full flex-col gap-2">
-                    <Label htmlFor="downloadCert">{val.name}</Label>
-                    <Button>
-                      <button
-                        type="button"
-                        className="text-xl w-[100px]"
-                        onClick={(e) => handleSelectedData({ ...val })}
-                      >
-                        SELECT
-                      </button>
-                    </Button>
-                  </div>
-                </div>
-              ))
+              <div className="w-[500px] mt-0 h-80 overflow-y-auto border border-gray-300 rounded-md">
+                <table className="table-auto w-full">
+                  <thead>
+                    <tr className="bg-gray-200">
+                      <th className="px-4 py-2 border">Name</th>
+                      <th className="px-4 py-2 border">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredUsers.length === 0 ? (
+                      <tr>
+                        <td colSpan="2" className="text-center py-4">
+                          No Data Available
+                        </td>
+                      </tr>
+                    ) : (
+                      filteredUsers.map((val) => (
+                        <tr key={val.id} className="text-center border-b">
+                          <td className="px-4 py-2 border">{val.name}</td>
+                          <td className="px-4 py-2 border">
+                            <Button>
+                              <button
+                                type="button"
+                                className="text-xl w-[100px]"
+                                onClick={(e) => handleSelectedData({ ...val })}
+                              >
+                                SELECT
+                              </button>
+                            </Button>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
             )}
           </div>
 
