@@ -193,7 +193,7 @@ const UploadCerts = () => {
               <div className="w-[500px] mt-0 h-80 overflow-y-auto border border-gray-300 rounded-md">
                 <table className="table-auto w-full">
                   <thead>
-                    <tr className="bg-slate-950 text-white">
+                    <tr className="bg-blue-950 text-white">
                       <th className="px-4 py-2 border">Name</th>
                       <th className="px-4 py-2 border">Action</th>
                     </tr>
