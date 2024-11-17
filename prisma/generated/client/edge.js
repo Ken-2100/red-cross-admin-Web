@@ -13,6 +13,7 @@ const {
   empty,
   join,
   raw,
+  skip,
   Decimal,
   Debug,
   objectEnumValues,
@@ -21,7 +22,7 @@ const {
   warnOnce,
   defineDmmfProperty,
   Public,
-  detectRuntime,
+  getRuntime
 } = require('./runtime/edge.js')
 
 
@@ -31,12 +32,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.10.2
- * Query Engine version: 5a9203d0590c951969e85a7d07215503f4672eb9
+ * Prisma Client JS version: 5.22.0
+ * Query Engine version: 605197351a3c8bdd595af2d2a9bc3025bca48ea2
  */
 Prisma.prismaVersion = {
-  client: "5.10.2",
-  engine: "5a9203d0590c951969e85a7d07215503f4672eb9"
+  client: "5.22.0",
+  engine: "605197351a3c8bdd595af2d2a9bc3025bca48ea2"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -74,6 +75,8 @@ Prisma.NullTypes = {
   JsonNull: objectEnumValues.classes.JsonNull,
   AnyNull: objectEnumValues.classes.AnyNull
 }
+
+
 
 
 
@@ -219,6 +222,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
+    "sourceFilePath": "C:\\Users\\amand\\Desktop\\capstoneSytem\\Admin-Web\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -226,13 +230,13 @@ const config = {
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../..",
-  "clientVersion": "5.10.2",
-  "engineVersion": "5a9203d0590c951969e85a7d07215503f4672eb9",
+  "clientVersion": "5.22.0",
+  "engineVersion": "605197351a3c8bdd595af2d2a9bc3025bca48ea2",
   "datasourceNames": [
     "db"
   ],
   "activeProvider": "mongodb",
-  "postinstall": false,
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -241,8 +245,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\r\n  provider = \"prisma-client-js\"\r\n  output   = \"./generated/client\"\r\n}\r\n\r\ndatasource db {\r\n  provider = \"mongodb\"\r\n  url      = env(\"DATABASE_URL\")\r\n}\r\n\r\nmodel UserAssessment {\r\n  id           String @id @default(auto()) @map(\"_id\") @db.ObjectId\r\n  cpr          String\r\n  firsAid      String\r\n  pathogen     String\r\n  preparedness String\r\n  teamwork     String\r\n  userId       String @db.ObjectId\r\n}\r\n\r\nmodel UserInfo {\r\n  id                   String    @id @default(auto()) @map(\"_id\") @db.ObjectId\r\n  v                    Int       @map(\"__v\")\r\n  address              String\r\n  category             String\r\n  certificateUrl       String    @default(\"\")\r\n  certificatedApproved Boolean   @default(false)\r\n  contact              String\r\n  dateCreated          DateTime  @default(now()) @db.Date\r\n  dateEnded            String?\r\n  dateStarted          String\r\n  email                String    @unique\r\n  gender               String\r\n  name                 String\r\n  orNumber             String\r\n  password             String\r\n  profilePictureUrl    String\r\n  userType             String\r\n  ratings              ratings[] // One-to-Many relation with ratings model    // One-to-Many relation with Rating\r\n}\r\n\r\nmodel choices {\r\n  id          String  @id @default(auto()) @map(\"_id\") @db.ObjectId\r\n  v           Int     @map(\"__v\")\r\n  isCorrect   Boolean\r\n  question_id String  @db.ObjectId\r\n  text        String\r\n}\r\n\r\nmodel instructors {\r\n  id             String   @id @default(auto()) @map(\"_id\") @db.ObjectId\r\n  v              Int      @map(\"__v\")\r\n  address        String\r\n  contact        String\r\n  createdAt      DateTime @default(now()) @db.Date\r\n  email          String\r\n  field          String\r\n  gender         String\r\n  name           String\r\n  profilePicture String\r\n  updatedAt      DateTime @default(now()) @db.Date\r\n}\r\n\r\nmodel module_quiz {\r\n  id          String   @id @default(auto()) @map(\"_id\") @db.ObjectId\r\n  v           Int      @map(\"__v\")\r\n  module_name String\r\n  questions   String[]\r\n  total_score Int\r\n  user_id     String\r\n}\r\n\r\nmodel modules {\r\n  id         String   @id @default(auto()) @map(\"_id\") @db.ObjectId\r\n  v          Int      @map(\"__v\")\r\n  createdAt  DateTime @db.Date\r\n  moduleName String\r\n  totalScore Int[]\r\n  updatedAt  DateTime @default(now()) @db.Date\r\n  userId     String   @db.ObjectId\r\n}\r\n\r\nmodel questions {\r\n  id           String   @id @default(auto()) @map(\"_id\") @db.ObjectId\r\n  v            Int      @map(\"__v\")\r\n  choices      String[]\r\n  module_id    String   @db.ObjectId\r\n  questionText String\r\n}\r\n\r\nmodel ratings {\r\n  id           String    @id @default(auto()) @map(\"_id\") @db.ObjectId\r\n  v            Int       @map(\"__v\")\r\n  createdAt    DateTime  @default(now()) @db.Date\r\n  instructorId String?   @db.ObjectId\r\n  rate1        Int\r\n  rate2        Int\r\n  rate3        Int\r\n  rate4        Int\r\n  rate5        Int\r\n  updatedAt    DateTime  @default(now()) @db.Date\r\n  user         UserInfo? @relation(fields: [userId], references: [id]) // Define the relationship\r\n  userId       String    @db.ObjectId\r\n}\r\n",
-  "inlineSchemaHash": "63980edb7a98833ee06a744ade4d2a721285ce734145ab884cf3a03b3b6d04da",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel UserAssessment {\n  id           String @id @default(auto()) @map(\"_id\") @db.ObjectId\n  cpr          String\n  firsAid      String\n  pathogen     String\n  preparedness String\n  teamwork     String\n  userId       String @db.ObjectId\n}\n\nmodel UserInfo {\n  id                   String    @id @default(auto()) @map(\"_id\") @db.ObjectId\n  v                    Int       @map(\"__v\")\n  address              String\n  category             String\n  certificateUrl       String    @default(\"\")\n  certificatedApproved Boolean   @default(false)\n  contact              String\n  dateCreated          DateTime  @default(now()) @db.Date\n  dateEnded            String?\n  dateStarted          String\n  email                String    @unique\n  gender               String\n  name                 String\n  orNumber             String\n  password             String\n  profilePictureUrl    String\n  userType             String\n  ratings              ratings[] // One-to-Many relation with ratings model    // One-to-Many relation with Rating\n}\n\nmodel choices {\n  id          String  @id @default(auto()) @map(\"_id\") @db.ObjectId\n  v           Int     @map(\"__v\")\n  isCorrect   Boolean\n  question_id String  @db.ObjectId\n  text        String\n}\n\nmodel instructors {\n  id             String   @id @default(auto()) @map(\"_id\") @db.ObjectId\n  v              Int      @map(\"__v\")\n  address        String\n  contact        String\n  createdAt      DateTime @default(now()) @db.Date\n  email          String\n  field          String\n  gender         String\n  name           String\n  profilePicture String\n  updatedAt      DateTime @default(now()) @db.Date\n}\n\nmodel module_quiz {\n  id          String   @id @default(auto()) @map(\"_id\") @db.ObjectId\n  v           Int      @map(\"__v\")\n  module_name String\n  questions   String[]\n  total_score Int\n  user_id     String\n}\n\nmodel modules {\n  id         String   @id @default(auto()) @map(\"_id\") @db.ObjectId\n  v          Int      @map(\"__v\")\n  createdAt  DateTime @db.Date\n  moduleName String\n  totalScore Int[]\n  updatedAt  DateTime @default(now()) @db.Date\n  userId     String   @db.ObjectId\n}\n\nmodel questions {\n  id           String   @id @default(auto()) @map(\"_id\") @db.ObjectId\n  v            Int      @map(\"__v\")\n  choices      String[]\n  module_id    String   @db.ObjectId\n  questionText String\n}\n\nmodel ratings {\n  id           String    @id @default(auto()) @map(\"_id\") @db.ObjectId\n  v            Int       @map(\"__v\")\n  createdAt    DateTime  @default(now()) @db.Date\n  instructorId String?   @db.ObjectId\n  rate1        Int\n  rate2        Int\n  rate3        Int\n  rate4        Int\n  rate5        Int\n  updatedAt    DateTime  @default(now()) @db.Date\n  user         UserInfo? @relation(fields: [userId], references: [id]) // Define the relationship\n  userId       String    @db.ObjectId\n}\n",
+  "inlineSchemaHash": "e6c379e1eaabf6c06ec8b3984913cf9e51aac511e777345e809c758a7a10c58d",
   "copyEngine": true
 }
 config.dirname = '/'
