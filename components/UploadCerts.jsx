@@ -17,66 +17,6 @@ const UploadCerts = () => {
   const [certificateLoading, setCertificateLoading] = useState(false);
   const [refreshData, setRefreshData] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  // const CertificatePreview = ({ selectedData }) => {
-  //   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  //   const toggleModal = () => {
-  //     setIsModalOpen(!isModalOpen);
-  //   };
-
-  //   return (
-  //     <div className="flex flex-col items-center justify-center">
-  //       {/* Button to Open Modal */}
-  //       <button
-  //         onClick={toggleModal}
-  //         className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4"
-  //       >
-  //         Preview Certificate
-  //       </button>
-
-  //       {/* Modal */}
-  //       {isModalOpen && (
-  //         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-  //           <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl p-5 lg:w-2/3 xl:w-1/2">
-  //             {/* Modal Header */}
-  //             <div className="flex justify-between items-center border-b pb-3">
-  //               <h2 className="text-xl font-bold">Certificate Preview</h2>
-  //               <button
-  //                 onClick={toggleModal}
-  //                 className="text-gray-500 hover:text-gray-700"
-  //               >
-  //                 &times;
-  //               </button>
-  //             </div>
-
-  //             {/* Modal Content */}
-  //             <div className="mt-5 flex justify-center items-center overflow-auto max-h-[80vh]">
-  //               <div className="w-full max-w-[95%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]">
-  //                 <CertifcateConatainer
-  //                   name={
-  //                     selectedData?.name
-  //                       ? selectedData.name.toUpperCase()
-  //                       : "No Certificate Selected"
-  //                   }
-  //                 />
-  //               </div>
-  //             </div>
-
-  //             {/* Modal Footer */}
-  //             <div className="flex justify-end mt-5">
-  //               <button
-  //                 onClick={toggleModal}
-  //                 className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-  //               >
-  //                 Close
-  //               </button>
-  //             </div>
-  //           </div>
-  //         </div>
-  //       )}
-  //     </div>
-  //   );
-  // };
 
   const fetchData = async () => {
     try {
@@ -162,11 +102,15 @@ const UploadCerts = () => {
             ? selectedData.name.toUpperCase()
             : "No Certificate Selected"
         }
+        dateStarted={
+          selectedData?.dateStarted
+            ? selectedData.dateStarted
+            : "No Name Selected"
+        }
       />
 
       <div className="mt-5">
         <h2 className="text-2xl font-bold">Upload Certificates</h2>
-        {/* <CertificatePreview selectedData={selectedData} /> */}
       </div>
       {loading ? (
         <div>
@@ -228,53 +172,69 @@ const UploadCerts = () => {
           </div>
 
           <div className="w-1/2 h-full flex flex-col gap-10">
-            <h2 className="flex flex-col">
-              <strong>Name</strong>
-              {selectedData?.name || "Select Name"}
-            </h2>
-            <div>
-              {selectedData.name ? (
-                <Button>
-                  <button
-                    type="button"
-                    className="text-xl px-3 py-2"
-                    onClick={handleDownload}
-                  >
-                    DOWNLOAD CERTIFICATE
-                  </button>
-                </Button>
-              ) : (
-                <Button>
-                  <button type="button" className="text-xl px-3 py-2">
-                    PLEASE SELECT NAME
-                  </button>
-                </Button>
-              )}
+            <div className="flex justify-between gap-2">
+              <h2 className="flex flex-col">
+                <strong>Name</strong>
+                {selectedData?.name || "Select Name"}
+              </h2>
+
+              <div className="relative inline-block group">
+                <div>
+                  {selectedData.name ? (
+                    <Button>
+                      <button
+                        type="button"
+                        className="text-xl px-3 py-2"
+                        onClick={handleDownload}
+                      >
+                        DOWNLOAD CERTIFICATE
+                      </button>
+                    </Button>
+                  ) : (
+                    <Button>
+                      <button type="button" className="text-xl px-3 py-2">
+                        SELECT NAME
+                      </button>
+                    </Button>
+                  )}
+                </div>
+
+                <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap rounded-lg bg-red-700 py-1.5 px-3 font-sans text-sm font-normal text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none">
+                  <p>Will download certificate of selected Name</p>
+                </div>
+              </div>
             </div>
             {/* <h1>{selectedData?.dateStarted}</h1> */}
-            <div className="flex w-full flex-col gap-2">
-              <Label htmlFor="uploadProfile">Upload Certificate</Label>
-              {selectedData.name ? (
-                <Button className="h-16" asChild>
-                  <UploadButton
-                    endpoint="pdfUploader"
-                    onClientUploadComplete={(res) => {
-                      setCertificate(res[0].url);
-                      toast({
-                        title: "Certificate Uploaded",
-                        description: "Certificate is successfully uploaded",
-                      });
-                    }}
-                    onUploadError={(error) => {
-                      alert(`ERROR! ${error.message}`);
-                    }}
-                  />
-                </Button>
-              ) : (
-                <Button disabled className="h-16">
-                  Upload Button Disabled (Select a Name)
-                </Button>
-              )}
+
+            <div className="relative inline-block group">
+              <div className="flex w-full flex-col gap-2">
+                <Label htmlFor="uploadProfile">Upload Certificate</Label>
+                {selectedData.name ? (
+                  <Button className="h-16" asChild>
+                    <UploadButton
+                      endpoint="pdfUploader"
+                      onClientUploadComplete={(res) => {
+                        setCertificate(res[0].url);
+                        toast({
+                          title: "Certificate Uploaded",
+                          description: "Certificate is successfully uploaded",
+                        });
+                      }}
+                      onUploadError={(error) => {
+                        alert(`ERROR! ${error.message}`);
+                      }}
+                    />
+                  </Button>
+                ) : (
+                  <Button disabled className="h-16">
+                    Upload Button Disabled (Select a Name)
+                  </Button>
+                )}
+              </div>
+
+              <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap rounded-lg bg-red-700 py-1.5 px-3 font-sans text-sm font-normal text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none">
+                <p>Download certificate first before uploading</p>
+              </div>
             </div>
 
             <div className="flex w-full flex-col gap-2">
