@@ -117,9 +117,9 @@ const UploadCerts = () => {
           <h2>Loading...</h2>
         </div>
       ) : (
-        <section className="w-full flex justify-between h-full ">
-          <div className="w-[500px] grid grid-cols-2 mt-2">
-            <div className="col-span-6 w-full">
+        <section className="w-full grid grid-cols-2 md:gap-8">
+          <div className="w-[500px] mt-2">
+            <div className="col-span-2">
               <Label>Search Name</Label>
               <input
                 type="text"
@@ -134,7 +134,7 @@ const UploadCerts = () => {
                 <h2>No Data Available</h2>
               </div>
             ) : (
-              <div className="w-[500px] mt-0 h-80 overflow-y-auto border border-gray-300 rounded-md">
+              <div className="w-[500px] row-span-2 mt-0 h-80 overflow-y-auto border border-gray-300 rounded-md inline-block">
                 <table className="table-auto w-full">
                   <thead>
                     <tr className="bg-blue-950 text-white">
@@ -171,8 +171,8 @@ const UploadCerts = () => {
             )}
           </div>
 
-          <div className="w-1/2 h-full flex flex-col gap-10">
-            <div className="flex justify-between gap-2">
+          <div className="w-1/2 h-full grid grid-row-3 items-center">
+            <div className="grid grid-cols-3 ">
               <h2 className="flex flex-col">
                 <strong>Name</strong>
                 {selectedData?.name || "Select Name"}
@@ -198,7 +198,6 @@ const UploadCerts = () => {
                     </Button>
                   )}
                 </div>
-
                 <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap rounded-lg bg-red-700 py-1.5 px-3 font-sans text-sm font-normal text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none">
                   <p>Will download certificate of selected Name</p>
                 </div>
