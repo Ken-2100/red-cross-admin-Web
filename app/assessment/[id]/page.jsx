@@ -5,7 +5,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { RadioGroup } from "@/components/ui/radio-group";
 
 const Assessment = ({ params }) => {
   const { id } = params;
@@ -103,7 +103,7 @@ const Assessment = ({ params }) => {
           <RadioGroup defaultValue="option-one">
             <div className="flex items-center gap-5 ">
               <div>
-                <RadioGroupItem value="option-one" id="option-one" />
+                {/* <RadioGroupItem value="option-one" id="option-one" /> */}
                 <input
                   type="radio"
                   onChange={(e) =>
