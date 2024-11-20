@@ -199,7 +199,7 @@ const UploadCerts = () => {
                   )}
                 </div>
                 <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap rounded-lg bg-red-700 py-1.5 px-3 font-sans text-sm font-normal text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none">
-                  <p>Will download certificate of selected Name</p>
+                  <p>Will download the certificate of selected name</p>
                 </div>
               </div>
             </div>
