@@ -2,27 +2,43 @@ import { NextResponse } from "next/server";
 import prisma from "@/libs/prismaDB";
 
 export async function PATCH(req, { params }) {
-  try {
-    const { formattedDate } = await req.json();
+	try {
+		const { formattedDate } = await req.json();
 
-    // Validate if formattedDate is provided
-    if (!formattedDate) {
-      return NextResponse.json({ message: "Formatted date is required" }, { status: 400 });
-    }
+		if (!params?.id) {
+			return NextResponse.json(
+				{ message: "User ID is required" },
+				{ status: 400 }
+			);
+		}
 
-    const updateUser = await prisma.userInfo.update({
-      where: {
-        id: params.id,  // Ensure the route is dynamic like `/api/user/[id]`
-      },
-      data: {
-        certificatedApproved: true,
-        dateEnded: formattedDate,
-      },
-    });
+		// Validate if formattedDate is provided
+		if (!formattedDate) {
+			return NextResponse.json(
+				{ message: "Formatted date is required" },
+				{ status: 400 }
+			);
+		}
 
-    return NextResponse.json({ message: "Update successful", updatedUser: updateUser });
-  } catch (error) {
-    console.error("Error updating user:", error);
-    return NextResponse.json({ message: "Error updating user", error: error.message }, { status: 500 });
-  }
+		const updateUser = await prisma.userInfo.update({
+			where: {
+				id: params.id, // Ensure the route is dynamic like `/api/user/[id]`
+			},
+			data: {
+				certificatedApproved: true,
+				dateEnded: formattedDate,
+			},
+		});
+
+		return NextResponse.json({
+			message: "Update successful",
+			updatedUser: updateUser,
+		});
+	} catch (error) {
+		console.error("Error updating user:", error);
+		return NextResponse.json(
+			{ message: "Error updating user", error: error.message },
+			{ status: 500 }
+		);
+	}
 }
