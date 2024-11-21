@@ -17,6 +17,7 @@ const Score = ({ params }) => {
         setUserAssessment(data);
       } catch (error) {
         console.error("Error fetching users:", error);
+        console.log(data);
       }
     };
 

@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-const CertificateContainer = ({ name, date, dateStarted }) => {
+const CertificateContainer = ({ name, date, dateStarted, category }) => {
   return (
     <div
       id="certificate"
@@ -123,13 +123,16 @@ const CertificateContainer = ({ name, date, dateStarted }) => {
             >
               This is to certify that <strong>{name || "Sample Name"}</strong>{" "}
               graduated in{" "}
-              <strong>STANDARD FIRST AID AND BLS CPR / AED TRAINING</strong>{" "}
-              conducted on {dateStarted} at Philippine Red Cross Dasmariñas City
-              Branch, G/F Units 2 & 3 Amada Building, Emilio Aguinaldo Highway,
-              Barangay Zone IV, Dasmariñas Cavite City, and{" "}
-              <strong>PASSED</strong> the evaluating examination given on {date}
-              . The training was conducted under the supervision of Mr. Fernando
-              B. Camacho Jr. and Loida D. Rivera, RN.
+              <strong>
+                {category || "Sample Category"} FIRST AID AND BLS CPR / AED
+                TRAINING
+              </strong>{" "}
+              conducted on {dateStarted || "Date Not Provided"} at Philippine
+              Red Cross Dasmariñas City Branch, G/F Units 2 & 3 Amada Building,
+              Emilio Aguinaldo Highway, Barangay Zone IV, Dasmariñas Cavite
+              City, and <strong>PASSED</strong> the evaluating examination given
+              on {date}. The training was conducted under the supervision of Mr.
+              Fernando B. Camacho Jr. and Loida D. Rivera, RN.
             </p>
             <p
               style={{

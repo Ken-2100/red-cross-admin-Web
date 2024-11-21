@@ -209,7 +209,11 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
+<<<<<<< HEAD
       "value": "C:\\Users\\ryanj\\Desktop\\Programming\\next js\\red_cross_collaboration\\red-cross-admin-Web\\prisma\\generated\\client",
+=======
+      "value": "C:\\Users\\amand\\Desktop\\capstoneSytem\\Admin-Web\\prisma\\generated\\client",
+>>>>>>> 8baf3134c58abf8aac5b1c38e49ec150de9209a8
       "fromEnvVar": null
     },
     "config": {
@@ -223,11 +227,19 @@ const config = {
       }
     ],
     "previewFeatures": [],
+<<<<<<< HEAD
     "sourceFilePath": "C:\\Users\\ryanj\\Desktop\\Programming\\next js\\red_cross_collaboration\\red-cross-admin-Web\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
     "rootEnvPath": "../../../.env",
+=======
+    "sourceFilePath": "C:\\Users\\amand\\Desktop\\capstoneSytem\\Admin-Web\\prisma\\schema.prisma",
+    "isCustomOutput": true
+  },
+  "relativeEnvPaths": {
+    "rootEnvPath": null,
+>>>>>>> 8baf3134c58abf8aac5b1c38e49ec150de9209a8
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../..",
@@ -237,7 +249,10 @@ const config = {
     "db"
   ],
   "activeProvider": "mongodb",
+<<<<<<< HEAD
   "postinstall": true,
+=======
+>>>>>>> 8baf3134c58abf8aac5b1c38e49ec150de9209a8
   "inlineDatasources": {
     "db": {
       "url": {
