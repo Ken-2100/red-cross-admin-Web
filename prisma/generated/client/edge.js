@@ -208,7 +208,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\ryanj\\Desktop\\Programming\\next js\\red_cross_collaboration\\red-cross-admin-Web\\prisma\\generated\\client",
+      "value": "C:\\Users\\User\\Desktop\\my files\\porgramming\\red-cross-admin-Web\\prisma\\generated\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -222,7 +222,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\ryanj\\Desktop\\Programming\\next js\\red_cross_collaboration\\red-cross-admin-Web\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\User\\Desktop\\my files\\porgramming\\red-cross-admin-Web\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -236,6 +236,7 @@ const config = {
     "db"
   ],
   "activeProvider": "mongodb",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
