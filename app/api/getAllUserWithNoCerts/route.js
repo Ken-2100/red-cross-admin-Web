@@ -1,19 +1,18 @@
 import { NextResponse } from "next/server";
-import prisma from '@/libs/prismaDB'
+import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 
+export async function GET() {
+  const usersWithNoCerts = await prisma.userInfo.findMany({
+    where: {
+      certificateUrl: "",
+    },
+  });
 
-export async function GET(){
+  if (usersWithNoCerts.length === 0) {
+    return NextResponse.json({ messsage: "No Available Data" });
+  }
 
-    const usersWithNoCerts = await prisma.userInfo.findMany({
-        where:{
-            certificateUrl: ""
-        }
-    })
-    
-    if(usersWithNoCerts.length === 0) {
-     return NextResponse.json({messsage:"No Available Data"})
-    }
-
-    return NextResponse.json(usersWithNoCerts);
+  return NextResponse.json(usersWithNoCerts);
 }
