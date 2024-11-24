@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CertifcateConatainer from "./CertifcateConatainer";
+import CertificateContainer from "./CertifcateConatainer";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { UploadButton } from "../app/utils/uploadthing";
@@ -17,6 +17,11 @@ const UploadCerts = () => {
   const [certificateLoading, setCertificateLoading] = useState(false);
   const [refreshData, setRefreshData] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [instructors, setIntstructors] = useState([]);
+  const [newInstructor, setNewInstructor] = useState({
+    prefix: "Mr.",
+    name: "",
+  });
 
   const fetchData = async () => {
     try {
@@ -94,19 +99,29 @@ const UploadCerts = () => {
     user.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const handleAddInstructor = () => {
+    if (newInstructor.name.trim() !== "") {
+      setIntstructors((prev) => [
+        ...prev,
+        `${newInstructor.prefix} ${newInstructor.name.trim()}`,
+      ]);
+      setNewInstructor({ prefix: "Mr.", name: "" }); // Reset the input fields
+    } else {
+      alert("Please enter a valid instructor name.");
+    }
+  };
+
+  const handleRemoveInstructor = (index) => {
+    setIntstructors((prev) => prev.filter((_, i) => i !== index));
+  };
   return (
     <div className="w-full h-full p-5">
-      <CertifcateConatainer
-        name={
-          selectedData?.name
-            ? selectedData.name.toUpperCase()
-            : "No Certificate Selected"
-        }
-        dateStarted={
-          selectedData?.dateStarted
-            ? selectedData.dateStarted
-            : "No Name Selected"
-        }
+      <CertificateContainer
+        name={selectedData?.name?.toUpperCase() || "No Certificate Selected"}
+        dateStarted={selectedData?.dateStarted || "No Date Selected"}
+        category={selectedData?.category || "No Category Selected"}
+        date={selectedData?.date || "No Date"}
+        instructors={instructors}
       />
 
       <div className="mt-5">
@@ -171,8 +186,8 @@ const UploadCerts = () => {
             )}
           </div>
 
-          <div className="w-1/2 h-full grid grid-row-3 items-center">
-            <div className="grid grid-cols-3 ">
+          <div className="w-full h-full grid grid-rows-3 grid-flow-col items-center">
+            <div className="grid grid-cols-6 ">
               <h2 className="flex flex-col">
                 <strong>Name</strong>
                 {selectedData?.name || "Select Name"}
@@ -204,50 +219,105 @@ const UploadCerts = () => {
               </div>
             </div>
             {/* <h1>{selectedData?.dateStarted}</h1> */}
-
-            <div className="relative inline-block group">
-              <div className="flex w-full flex-col gap-2">
-                <Label htmlFor="uploadProfile">Upload Certificate</Label>
-                {selectedData.name ? (
-                  <Button className="h-16" asChild>
-                    <UploadButton
-                      endpoint="pdfUploader"
-                      onClientUploadComplete={(res) => {
-                        setCertificate(res[0].url);
-                        toast({
-                          title: "Certificate Uploaded",
-                          description: "Certificate is successfully uploaded",
-                        });
-                      }}
-                      onUploadError={(error) => {
-                        alert(`ERROR! ${error.message}`);
-                      }}
-                    />
-                  </Button>
-                ) : (
-                  <Button disabled className="h-16">
-                    Upload Button Disabled (Select a Name)
-                  </Button>
-                )}
-              </div>
-
-              <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap rounded-lg bg-red-700 py-1.5 px-3 font-sans text-sm font-normal text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none">
-                <p>Download certificate first before uploading</p>
-              </div>
-            </div>
-
-            <div className="flex w-full flex-col gap-2">
-              <Label htmlFor="uploadProfile">Submit Certificate</Label>
-              <Button asChild>
-                <button
-                  disabled={certificate === ""}
-                  onClick={handleSubmit}
-                  className="w-full bg-red-500 h-16 hover:bg-red-600"
+            <div>
+              <h2>
+                <strong>Add Instructor</strong>
+              </h2>
+              <div className="flex gap-5">
+                <select
+                  value={newInstructor.prefix}
+                  onChange={(e) =>
+                    setNewInstructor((prev) => ({
+                      ...prev,
+                      prefix: e.target.value,
+                    }))
+                  }
+                  className="col-span-2 border px-2 py-1 rounded-md"
                 >
-                  {certificateLoading ? "LOADING..." : "SUBMIT"}
-                </button>
-              </Button>
+                  <option value="Mr.">Mr.</option>
+                  <option value="Ms.">Ms.</option>
+                </select>
+                <input
+                  type="text"
+                  value={newInstructor.name}
+                  onChange={(e) =>
+                    setNewInstructor((prev) => ({
+                      ...prev,
+                      name: e.target.value,
+                    }))
+                  }
+                  placeholder="Enter Instructor's name"
+                  className="col-span-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <Button
+                  onClick={handleAddInstructor}
+                  className="col-span-2 bg-blue-500 text-white"
+                >
+                  Add
+                </Button>
+              </div>
             </div>
+
+            <ul className="mt-2">
+              {instructors.map((instructor, index) => (
+                <li
+                  key={index}
+                  className="flex jsutify-between mt-2 items-center"
+                >
+                  <span>{instructor}</span>
+                  <Button
+                    onClick={() => handleRemoveInstructor(index)}
+                    className="text-white bg-red-600 ms-2"
+                  >
+                    Remove
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="relative inline-block group">
+            <div className="flex w-full flex-col gap-2">
+              <Label htmlFor="uploadProfile">Upload Certificate</Label>
+              {selectedData.name ? (
+                <Button className="h-16" asChild>
+                  <UploadButton
+                    endpoint="pdfUploader"
+                    onClientUploadComplete={(res) => {
+                      setCertificate(res[0].url);
+                      toast({
+                        title: "Certificate Uploaded",
+                        description: "Certificate is successfully uploaded",
+                      });
+                    }}
+                    onUploadError={(error) => {
+                      alert(`ERROR! ${error.message}`);
+                    }}
+                  />
+                </Button>
+              ) : (
+                <Button disabled className="h-16">
+                  Upload Button Disabled (Select a Name)
+                </Button>
+              )}
+            </div>
+
+            <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap rounded-lg bg-red-700 py-1.5 px-3 font-sans text-sm font-normal text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none">
+              <p>Download certificate first before uploading</p>
+            </div>
+          </div>
+
+          <div className="flex w-full flex-col gap-2">
+            <Label htmlFor="uploadProfile">Submit Certificate</Label>
+            <Button asChild>
+              <button
+                disabled={certificate === ""}
+                onClick={handleSubmit}
+                className="w-full bg-red-500 h-16 hover:bg-red-600"
+              >
+                {certificateLoading ? "LOADING..." : "SUBMIT"}
+              </button>
+            </Button>
           </div>
         </section>
       )}

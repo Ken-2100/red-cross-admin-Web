@@ -1,7 +1,13 @@
 import React from "react";
 import Image from "next/image";
 
-const CertificateContainer = ({ name, date, dateStarted, category }) => {
+const CertificateContainer = ({
+  name,
+  date,
+  dateStarted,
+  category,
+  instructors = [],
+}) => {
   return (
     <div
       id="certificate"
@@ -131,8 +137,16 @@ const CertificateContainer = ({ name, date, dateStarted, category }) => {
               Red Cross Dasmariñas City Branch, G/F Units 2 & 3 Amada Building,
               Emilio Aguinaldo Highway, Barangay Zone IV, Dasmariñas Cavite
               City, and <strong>PASSED</strong> the evaluating examination given
-              on {date}. The training was conducted under the supervision of Mr.
-              Fernando B. Camacho Jr. and Loida D. Rivera, RN.
+              on {date}. The training was conducted under the supervision of{" "}
+              {instructors.length > 0
+                ? instructors.map((instructor, index) => (
+                    <span key={index}>
+                      {index > 0 && ", "}
+                      {instructor}
+                    </span>
+                  ))
+                : "select instructors"}
+              .
             </p>
             <p
               style={{
