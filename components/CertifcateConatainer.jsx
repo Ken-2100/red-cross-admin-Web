@@ -37,7 +37,7 @@ const CertificateContainer = ({ name, date, dateStarted, category }) => {
               src="/assets/white logo.png"
               alt="logo"
               fill
-              className="object-contain"
+              className="object-cover"
             />
           </div>
 
@@ -177,17 +177,14 @@ const CertificateContainer = ({ name, date, dateStarted, category }) => {
       <div
         style={{
           width: "100%",
-          height: "50px",
+          height: "75px",
           padding: "10px",
           backgroundColor: "#dc2626",
-          bottom: "10px",
+          bottom: "250px",
           left: "0",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          position: "absolute",
-          top: "0",
           overflow: "hidden",
+          position: "relative",
         }}
       >
         <p style={{ color: "white", fontSize: "16px", fontStyle: "italic" }}>
