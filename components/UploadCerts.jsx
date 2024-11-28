@@ -26,7 +26,7 @@ const UploadCerts = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3000/api/getAllUserWithNoCerts"
+        `${process.env.NEXTAUTH_URL}/api/getAllUserWithNoCerts`
       );
       const data = await response.json();
       if (Array.isArray(data)) {

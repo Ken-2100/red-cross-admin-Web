@@ -12,7 +12,9 @@ const SearchArrayProvider = ({ children }) => {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const usersData = await axios.get(`/api/user?timestamp=${Date.now()}`);
+        const usersData = await axios.get(
+          `${process.env.NEXTAUTH_URL}/api/user?timestamp=${Date.now()}`
+        );
         const data = usersData.data;
         setUsers(data);
       } catch (error) {

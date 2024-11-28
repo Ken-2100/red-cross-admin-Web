@@ -39,7 +39,9 @@ export default function TotalEnrolliesGender() {
   React.useEffect(() => {
     const fetchGenders = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/getGenders");
+        const response = await fetch(
+          `${process.env.NEXTAUTH_URL}/api/getGenders`
+        );
         const data = await response.json();
 
         // console.log(data) ken

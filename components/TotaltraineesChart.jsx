@@ -40,7 +40,9 @@ export default function TotalTraineesChart() {
   useEffect(() => {
     const fetchSession = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/getallcities");
+        const response = await fetch(
+          `${process.env.NEXTAUTH_URL}/api/getallcities`
+        );
         const data = await response.json();
 
         // console.log(data); ken

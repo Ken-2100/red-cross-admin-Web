@@ -81,7 +81,10 @@ const RegisterForm = ({
     e.preventDefault();
 
     await axios
-      .post("/api/register", { ...userData, dateStarted: formattedDate })
+      .post(`${process.env.NEXTAUTH_URL}/api/register`, {
+        ...userData,
+        dateStarted: formattedDate,
+      })
       .then(() => {
         toast({
           title: "Registration Success!",

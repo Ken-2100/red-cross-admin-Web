@@ -69,7 +69,10 @@ const DataTable = ({
 
     const userIds = checkedUsers.map((user) => user.id);
     try {
-      await axios.patch("/api/users/graduates", { userIds, formattedDate }); // Update your API route accordingly
+      await axios.patch(`${process.env.NEXTAUTH_URL}/api/users/graduates`, {
+        userIds,
+        formattedDate,
+      }); // Update your API route accordingly
       setUnlockLoading(false);
       toast({
         title: "Selected Trainees has been passed",
