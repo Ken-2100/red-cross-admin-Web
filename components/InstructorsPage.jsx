@@ -23,7 +23,7 @@ const InstructorsPage = () => {
       try {
         // Fetch data from your API endpoint
         const response = await fetch(
-          `${process.env.NEXTAUTH_URL}/api/getInstructorRatings`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getInstructorRatings`
         ); // Replace with your actual API route
         if (!response.ok) {
           throw new Error("Failed to fetch data");

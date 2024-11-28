@@ -81,7 +81,7 @@ const RegisterForm = ({
     e.preventDefault();
 
     await axios
-      .post(`${process.env.NEXTAUTH_URL}/api/register`, {
+      .post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/register`, {
         ...userData,
         dateStarted: formattedDate,
       })

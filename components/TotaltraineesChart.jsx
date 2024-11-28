@@ -41,7 +41,7 @@ export default function TotalTraineesChart() {
     const fetchSession = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXTAUTH_URL}/api/getallcities`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getallcities`
         );
         const data = await response.json();
 

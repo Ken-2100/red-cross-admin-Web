@@ -32,7 +32,7 @@ const Dashboard = () => {
 
   const handleUnlockCertificate = async (id) => {
     await axios
-      .patch(`${process.env.NEXTAUTH_URL}/api/certificate/${id}`, {
+      .patch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/certificate/${id}`, {
         formattedDate: formattedDate,
       })
       .then(() => {

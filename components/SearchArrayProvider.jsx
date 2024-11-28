@@ -13,7 +13,9 @@ const SearchArrayProvider = ({ children }) => {
     const getUsers = async () => {
       try {
         const usersData = await axios.get(
-          `${process.env.NEXTAUTH_URL}/api/user?timestamp=${Date.now()}`
+          `${
+            process.env.NEXT_PUBLIC_API_BASE_URL
+          }/api/user?timestamp=${Date.now()}`
         );
         const data = usersData.data;
         setUsers(data);

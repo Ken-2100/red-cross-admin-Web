@@ -40,7 +40,7 @@ export default function TotalEnrolliesGender() {
     const fetchGenders = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXTAUTH_URL}/api/getGenders`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getGenders`
         );
         const data = await response.json();
 

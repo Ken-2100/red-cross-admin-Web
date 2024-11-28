@@ -74,7 +74,7 @@ export default function PerMonthChart() {
       try {
         // Fetch data from your API endpoint
         const response = await fetch(
-          `${process.env.NEXTAUTH_URL}/api/getDataPermonth`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getDataPermonth`
         ); // Replace with your actual API route
         if (!response.ok) {
           throw new Error("Failed to fetch data");
