@@ -111,16 +111,16 @@ export const authOptions = {
   session: {
     strategy: "jwt", //json web tokens
   },
-  cookies: {
-    sessionToken: {
-      name: `__Secure-next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        secure: process.env.NODE_ENV === "production", // Set to false for local testing in production mode
-      },
-    },
-  },
+  // cookies: {
+  //   sessionToken: {
+  //     name: `__Secure-next-auth.session-token`,
+  //     options: {
+  //       httpOnly: true,
+  //       sameSite: "lax",
+  //       secure: process.env.NODE_ENV === "production", // Set to false for local testing in production mode
+  //     },
+  //   },
+  // },
 };
 
 const handler = NextAuth(authOptions);
