@@ -43,16 +43,6 @@ const Dashboard = () => {
 
   return (
     <div className="flex justify-center items-center w-full bg-white h-full">
-      <h2>Changes</h2>
-      <h2>Changes</h2>
-      <h2>Changes</h2>
-      <h2>Changes</h2>
-      <h2>Changes</h2>
-      <h2>Changes</h2>
-      <h2>Changes</h2>
-      <h2>Changes</h2>
-      <h2>Changes</h2>
-      <h2>Changes</h2>
       {navigationData.navigation === "form" && (
         <RegisterForm
           update={update}
