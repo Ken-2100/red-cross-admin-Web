@@ -54,6 +54,7 @@ const RegisterForm = ({
   });
 
   const [date, setDate] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const convertedDate = new Date(date);
   const users = useContext(SearchArrayDataProvider);
@@ -157,14 +158,24 @@ const RegisterForm = ({
             <Label htmlFor="password">Password</Label>
 
             {!update && (
-              <Input
-                value={userData.password}
-                onChange={(e) =>
-                  setUserData({ ...userData, password: e.target.value })
-                }
-                placeholder="Enter Password"
-                type="password"
-              />
+              <div className="relative">
+                <Input
+                  value={userData.password}
+                  onChange={(e) =>
+                    setUserData({ ...userData, password: e.target.value })
+                  }
+                  placeholder="Enter Password"
+                  type={showPassword ? "text" : "password"}
+                  className="pr-10" // Add padding to prevent overlap with the button
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 px-3 text-gray-500 hover:text-gray-700"
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
             )}
           </div>
         </div>

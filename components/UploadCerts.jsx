@@ -218,7 +218,7 @@ const UploadCerts = () => {
                 </div>
               </div>
             </div>
-            {/* <h1>{selectedData?.dateStarted}</h1> */}
+
             <div>
               <h2>
                 <strong>Add Instructor</strong>
@@ -275,7 +275,14 @@ const UploadCerts = () => {
               ))}
             </ul>
           </div>
-
+          <div>
+            <h1>
+              <strong>Date Started</strong>
+            </h1>
+            <div>
+              <span>{selectedData?.dateStarted}</span>
+            </div>
+          </div>
           <div className="relative inline-block group">
             <div className="flex w-full flex-col gap-2">
               <Label htmlFor="uploadProfile">Upload Certificate</Label>
