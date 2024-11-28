@@ -111,7 +111,6 @@ export const authOptions = {
   session: {
     strategy: "jwt", //json web tokens
   },
-  debug: process.env.NODE_ENV === "development",
   cookies: {
     sessionToken: {
       name: `__Secure-next-auth.session-token`,
