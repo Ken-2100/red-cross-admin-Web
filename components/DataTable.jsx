@@ -13,8 +13,6 @@ import { Button } from "@/components/ui/button";
 import Loader from "./Loader";
 import { FaRegUser } from "react-icons/fa6";
 import { Checkbox } from "@/components/ui/checkbox";
-import { SearchArrayDataProvider } from "./SearchArrayProvider";
-import { useToast } from "@/components/hooks/use-toast";
 import {
   DropdownMenu,
   DropdownMenuContent,
