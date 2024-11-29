@@ -18,7 +18,7 @@ module.exports = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "https://red-cross-admin-web-en41.vercel.app/", // Replace with your frontend URL
+            value: "https://red-cross-admin-web-en41.vercel.app", // Replace with your frontend URL
           },
           {
             key: "Access-Control-Allow-Methods",
