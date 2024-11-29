@@ -25,7 +25,7 @@ const SearchArrayProvider = ({ children }) => {
     };
 
     getUsers();
-  }, [users]);
+  }, []);
   // ken remove user in dependency
   const notAdminUsers = users.filter(
     (val) => val.userType !== "admin" && val.certificatedApproved === false
