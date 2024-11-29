@@ -134,12 +134,12 @@ const CertificateContainer = ({
                 {(category || "Sample Category").toUpperCase()} FIRST AID AND
                 BLS CPR / AED TRAINING
               </strong>{" "}
-              conducted on {dateStarted || "Date Not Provided"} at Philippine
-              Red Cross Dasmariñas City Branch, G/F Units 2 & 3 Amada Building,
-              Emilio Aguinaldo Highway, Barangay Zone IV, Dasmariñas Cavite
-              City, and <strong>PASSED</strong> the evaluating examination given
-              on {dateEvaluation}. The training was conducted under the
-              supervision of{" "}
+              conducted on {dateStarted || "Date Not Provided"}-{dateEvaluation}{" "}
+              at Philippine Red Cross Dasmariñas City Branch, G/F Units 2 & 3
+              Amada Building, Emilio Aguinaldo Highway, Barangay Zone IV,
+              Dasmariñas Cavite City, and <strong>PASSED</strong> the evaluating
+              examination given on {dateEvaluation}. The training was conducted
+              under the supervision of{" "}
               {instructors.length > 0
                 ? instructors.map((instructor, index) => (
                     <span key={index}>
