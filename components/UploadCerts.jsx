@@ -23,6 +23,28 @@ const UploadCerts = () => {
     name: "",
   });
 
+  const validUntil = selectedData?.dateStarted
+    ? new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }).format(
+        new Date(
+          new Date(selectedData.dateStarted).setFullYear(
+            new Date(selectedData.dateStarted).getFullYear() + 2
+          )
+        )
+      )
+    : "No Date";
+
+  const formattedDateStarted = selectedData?.dateStarted
+    ? new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }).format(new Date(selectedData.dateStarted))
+    : "No Date";
+
   const fetchData = async () => {
     try {
       const response = await fetch(
@@ -114,13 +136,39 @@ const UploadCerts = () => {
   const handleRemoveInstructor = (index) => {
     setIntstructors((prev) => prev.filter((_, i) => i !== index));
   };
+
+  const calculateEvaluationDate = (category, dateStarted) => {
+    if (!dateStarted) return "No Date";
+    const startDate = new Date(dateStarted);
+
+    if (category === "standard") {
+      startDate.setDate(startDate.getDate() + 3);
+    } else if (category === "occupational") {
+      startDate.setDate(startDate.getDate() + 1);
+    }
+
+    // Format the date in "Month DD, YYYY" style
+    const formattedDate = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }).format(startDate);
+
+    return formattedDate;
+  };
+
+  const evaluationDate = calculateEvaluationDate(
+    selectedData?.category,
+    selectedData?.dateStarted
+  );
   return (
     <div className="w-full h-full p-5">
       <CertificateContainer
-        name={selectedData?.name?.toUpperCase() || "No Certificate Selected"}
-        dateStarted={selectedData?.dateStarted || "No Date Selected"}
-        category={selectedData?.category || "No Category Selected"}
-        date={selectedData?.date || "No Date"}
+        name={selectedData?.name?.toUpperCase() || "No Name Selected"}
+        dateStarted={formattedDateStarted}
+        category={selectedData?.category || "No Category"}
+        dateValidity={validUntil || "No Date"}
+        dateEvaluation={evaluationDate || "No Date"}
         instructors={instructors}
       />
 
@@ -185,7 +233,7 @@ const UploadCerts = () => {
               </div>
             )}
           </div>
-
+          {}
           <div className="w-full h-full grid grid-rows-3 grid-flow-col items-center">
             <div className="grid grid-cols-6 ">
               <h2 className="flex flex-col">
@@ -246,7 +294,7 @@ const UploadCerts = () => {
                       name: e.target.value,
                     }))
                   }
-                  placeholder="Enter Instructor's name"
+                  placeholder="e.g Juan D. Cruz"
                   className="col-span-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <Button
@@ -277,11 +325,9 @@ const UploadCerts = () => {
           </div>
           <div>
             <h1>
-              <strong>Date Started</strong>
+              <strong>Date Of Evaluation</strong>
             </h1>
-            <div>
-              <span>{selectedData?.dateStarted}</span>
-            </div>
+            <div></div>
           </div>
           <div className="relative inline-block group">
             <div className="flex w-full flex-col gap-2">

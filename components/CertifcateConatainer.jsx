@@ -3,7 +3,8 @@ import Image from "next/image";
 
 const CertificateContainer = ({
   name,
-  date,
+  dateEvaluation,
+  dateValidity,
   dateStarted,
   category,
   instructors = [],
@@ -130,14 +131,15 @@ const CertificateContainer = ({
               This is to certify that <strong>{name || "Sample Name"}</strong>{" "}
               graduated in{" "}
               <strong>
-                {category || "Sample Category"} FIRST AID AND BLS CPR / AED
-                TRAINING
+                {(category || "Sample Category").toUpperCase()} FIRST AID AND
+                BLS CPR / AED TRAINING
               </strong>{" "}
               conducted on {dateStarted || "Date Not Provided"} at Philippine
               Red Cross Dasmariñas City Branch, G/F Units 2 & 3 Amada Building,
               Emilio Aguinaldo Highway, Barangay Zone IV, Dasmariñas Cavite
               City, and <strong>PASSED</strong> the evaluating examination given
-              on {date}. The training was conducted under the supervision of{" "}
+              on {dateEvaluation}. The training was conducted under the
+              supervision of{" "}
               {instructors.length > 0
                 ? instructors.map((instructor, index) => (
                     <span key={index}>
@@ -156,7 +158,7 @@ const CertificateContainer = ({
               }}
             >
               This certification is being issued for <strong>reference</strong>{" "}
-              purposes and shall be valid up to {date} only.
+              purposes and shall be valid up to {dateValidity} only.
             </p>
           </div>
         </div>
