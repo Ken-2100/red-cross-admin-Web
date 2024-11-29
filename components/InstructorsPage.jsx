@@ -23,7 +23,7 @@ const InstructorsPage = () => {
       try {
         // Fetch data from your API endpoint
         const response = await fetch(
-          `http://localhost:3000/api/getInstructorRatings`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getInstructorRatings`
         ); // Replace with your actual API route
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -47,7 +47,7 @@ const InstructorsPage = () => {
       try {
         // Fetch data from your API endpoint
         const response = await fetch(
-          `http://localhost:3000/api/getAllUserRatings/${instructorId}`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllUserRatings/${instructorId}`
         ); // Replace with your actual API route
         if (!response.ok) {
           throw new Error("Failed to fetch data");

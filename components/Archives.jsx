@@ -81,7 +81,7 @@ const Archives = () => {
     setDeleteLoader(true);
 
     await axios
-      .delete(`/api/user/${id}`)
+      .delete(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/${id}`)
       .then(() => {
         toast({
           title: "User Successfully Deleted!",

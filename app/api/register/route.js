@@ -1,62 +1,84 @@
-import prisma from '@/libs/prismaDB'
-import { NextResponse } from 'next/server'
-import bcrypt from 'bcryptjs'
+import prisma from "@/libs/prismaDB";
+import { NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
+import { cors } from "@/lib/cors-middleware";
 
-export async function POST(req){
+export async function POST(req) {
+  // Apply CORS
+  const corsHeaders = cors(req);
 
-    const body  = await req.json();
-    const {name,email,password,address,contact,category,gender,dateStarted,profilePictureUrl,orNumber} = body;
+  try {
+    const body = await req.json();
+    const {
+      name,
+      email,
+      password,
+      address,
+      contact,
+      category,
+      gender,
+      dateStarted,
+      profilePictureUrl,
+      orNumber,
+    } = body;
 
-
-    // console.log(gender); ken
-
-
-    if(!name || !email || !password || !address || !contact || !category || !dateStarted || !gender){ //validate input 
-        return new NextResponse('Missing Fields', {status:400});
+    // Validate input
+    if (
+      !name ||
+      !email ||
+      !password ||
+      !address ||
+      !contact ||
+      !category ||
+      !gender ||
+      !dateStarted
+    ) {
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400, headers: corsHeaders }
+      );
     }
 
-    
+    // Check if the user already exists
+    const userExist = await prisma.userInfo.findUnique({
+      where: { email },
+    });
 
-    const userExist  = await prisma.userInfo.findUnique({
-        where:{
-            email:email
-        }
-    })
-
-
-    if(userExist){
-        throw new Error({message:"email already exist!"}); 
+    if (userExist) {
+      return NextResponse.json(
+        { error: "Email already exists" },
+        { status: 409, headers: corsHeaders } // 409: Conflict
+      );
     }
 
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    else{
-        const hashedPassword = await  bcrypt.hash(password,10);
+    // Create the user in the database
+    const user = await prisma.userInfo.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        address,
+        contact,
+        category,
+        gender,
+        dateStarted,
+        profilePictureUrl,
+        orNumber,
+        userType: "user",
+        v: 2, // Versioning for user schema
+      },
+    });
 
-        const user = await prisma.userInfo.create({
-            data:{
-                name:name,
-                orNumber:orNumber,
-                email:email,
-                address:address,
-                contact:contact,
-                userType: "user",
-                password:hashedPassword,
-                v:2,
-                category:category,
-                dateStarted:dateStarted,
-                profilePictureUrl:profilePictureUrl,
-                gender:gender
-            }
-        })
-    
-    
-        return NextResponse.json(user);
-
-    }
-
-
-
-   
-
-    
+    // Return the created user
+    return NextResponse.json(user, { headers: corsHeaders });
+  } catch (error) {
+    console.error("Error creating user:", error);
+    return NextResponse.json(
+      { error: "An error occurred while creating the user" },
+      { status: 500, headers: corsHeaders }
+    );
+  }
 }

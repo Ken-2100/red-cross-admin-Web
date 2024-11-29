@@ -13,8 +13,6 @@ import { Button } from "@/components/ui/button";
 import Loader from "./Loader";
 import { FaRegUser } from "react-icons/fa6";
 import { Checkbox } from "@/components/ui/checkbox";
-import { SearchArrayDataProvider } from "./SearchArrayProvider";
-import { useToast } from "@/components/hooks/use-toast";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -71,7 +69,13 @@ const DataTable = ({
 
     const userIds = checkedUsers.map((user) => user.id);
     try {
-      await axios.patch("/api/users/graduates", { userIds, formattedDate }); // Update your API route accordingly
+      await axios.patch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/users/graduates`,
+        {
+          userIds,
+          formattedDate,
+        }
+      ); // Update your API route accordingly
       setUnlockLoading(false);
       toast({
         title: "Selected Trainees has been passed",

@@ -12,7 +12,11 @@ const SearchArrayProvider = ({ children }) => {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const usersData = await axios.get(`/api/user?timestamp=${Date.now()}`);
+        const usersData = await axios.get(
+          `${
+            process.env.NEXT_PUBLIC_API_BASE_URL
+          }/api/user?timestamp=${Date.now()}`
+        );
         const data = usersData.data;
         setUsers(data);
       } catch (error) {
@@ -21,7 +25,7 @@ const SearchArrayProvider = ({ children }) => {
     };
 
     getUsers();
-  }, [users]);
+  }, []);
   // ken remove user in dependency
   const notAdminUsers = users.filter(
     (val) => val.userType !== "admin" && val.certificatedApproved === false

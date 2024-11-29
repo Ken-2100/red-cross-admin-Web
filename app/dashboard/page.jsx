@@ -25,12 +25,16 @@ const Dashboard = () => {
   const [updateId, setUpdateId] = useState("");
 
   const handleDelete = async (id) => {
-    const data = await axios.delete(`/api/user/${id}`);
+    const data = await axios.delete(
+      `${process.env.NEXTAUTH_URL}/api/user/${id}`
+    );
   };
 
   const handleUnlockCertificate = async (id) => {
     await axios
-      .patch(`/api/certificate/${id}`, { formattedDate: formattedDate })
+      .patch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/certificate/${id}`, {
+        formattedDate: formattedDate,
+      })
       .then(() => {
         alert("user certificate has been unlock!");
       })

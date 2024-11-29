@@ -82,7 +82,10 @@ const RegisterForm = ({
     e.preventDefault();
 
     await axios
-      .post("/api/register", { ...userData, dateStarted: formattedDate })
+      .post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/register`, {
+        ...userData,
+        dateStarted: formattedDate,
+      })
       .then(() => {
         toast({
           title: "Registration Success!",
