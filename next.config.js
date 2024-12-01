@@ -18,7 +18,7 @@ const nextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "https://red-cross-admin-web-en41.vercel.app", // Frontend URL
+            value: process.env.NEXT_PUBLIC_API_BASE_URL, // Frontend URL
           },
           {
             key: "Access-Control-Allow-Methods",
