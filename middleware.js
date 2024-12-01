@@ -17,6 +17,8 @@ export async function middleware(request) {
   }
 }
 
+//black list path in array
+
 export const config = {
   matcher: ["/", "/dashboard"],
 };
