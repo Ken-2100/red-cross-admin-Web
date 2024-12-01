@@ -1,11 +1,9 @@
 import prisma from "@/libs/prismaDB";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { cors } from "@/lib/cors-middleware";
 
 export async function POST(req) {
   // Apply CORS
-  const corsHeaders = cors(req);
 
   try {
     const body = await req.json();
