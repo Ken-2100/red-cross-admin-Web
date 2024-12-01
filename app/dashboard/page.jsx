@@ -25,9 +25,20 @@ const Dashboard = () => {
   const [updateId, setUpdateId] = useState("");
 
   const handleDelete = async (id) => {
-    const data = await axios.delete(
-      `${process.env.NEXTAUTH_URL}/api/user/${id}`
-    );
+    try {
+      const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/${id}`
+      );
+
+      if (response.status === 200) {
+        alert("User deleted successfully!");
+      } else {
+        alert("Failed to delete user. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      alert("An error occurred while deleting the user. Please try again.");
+    }
   };
 
   const handleUnlockCertificate = async (id) => {
