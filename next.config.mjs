@@ -19,8 +19,7 @@ const nextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value:
-              "https://red-cross-admin-7l9jp896r-ken-2100s-projects.vercel.app", // Set your origin
+            value: "https://red-cross-admin-web.vercel.app", // Set your origin
           },
           {
             key: "Access-Control-Allow-Methods",
