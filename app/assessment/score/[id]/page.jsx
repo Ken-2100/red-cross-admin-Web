@@ -98,6 +98,7 @@ const Score = ({ params }) => {
         </div>
 
         <div className="w-full h-96 bg-red-700 rounded p-5">
+          <h2>testing</h2>
           <h2 className="text-white mb-5">Assessment Score</h2>
 
           <div className="flex flex-col gap-5 h-full ">
