@@ -33,7 +33,7 @@ export async function POST(req) {
     ) {
       return NextResponse.json(
         { error: "Missing required fields" },
-        { status: 400, headers: corsHeaders }
+        { status: 400 }
       );
     }
 
@@ -45,7 +45,7 @@ export async function POST(req) {
     if (userExist) {
       return NextResponse.json(
         { error: "Email already exists" },
-        { status: 409, headers: corsHeaders } // 409: Conflict
+        { status: 409 } // 409: Conflict
       );
     }
 
@@ -71,12 +71,12 @@ export async function POST(req) {
     });
 
     // Return the created user
-    return NextResponse.json(user, { headers: corsHeaders });
+    return NextResponse.json(user);
   } catch (error) {
     console.error("Error creating user:", error);
     return NextResponse.json(
       { error: "An error occurred while creating the user" },
-      { status: 500, headers: corsHeaders }
+      { status: 500 }
     );
   }
 }
