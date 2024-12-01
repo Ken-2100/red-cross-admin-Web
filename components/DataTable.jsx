@@ -194,7 +194,7 @@ const DataTable = ({
                           <DropdownMenuItem>
                             <button
                               onClick={() => {
-                                handleDelete(val.id);
+                                handleDelete(val._id);
                                 toast({
                                   title: "User Successfully Deleted!",
                                   description: new Date(),
