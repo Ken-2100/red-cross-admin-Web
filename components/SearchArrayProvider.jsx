@@ -8,9 +8,10 @@ const SearchArrayProvider = ({ children }) => {
   const [searchData, setSearchData] = useState("");
   const [searchDataArchives, setSearchDataArchives] = useState("");
   const [rootFlag, setRootFlag] = useState("");
-
+  console.log("outside flag", rootFlag);
   // Fetch users when the component mounts
   useEffect(() => {
+    console.log("Useffect flag", rootFlag);
     const getUsers = async () => {
       try {
         const response = await fetch(
