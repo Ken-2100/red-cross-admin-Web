@@ -11,7 +11,7 @@ const SearchArrayProvider = ({ children }) => {
   console.log("outside flag", rootFlag);
   // Fetch users when the component mounts
   useEffect(() => {
-    const ws = new WebSocket$(
+    const ws = new WebSocket(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`
     );
 
