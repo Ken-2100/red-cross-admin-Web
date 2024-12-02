@@ -91,6 +91,8 @@ const RegisterForm = ({
           title: "Registration Success!",
           description: "Successfully Registered Trainee",
         });
+        const randomData = Math.random();
+        users.setRootFlag(randomData);
 
         setLoading(false);
         setUserData({
