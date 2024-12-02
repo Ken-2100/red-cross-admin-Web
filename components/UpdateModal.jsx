@@ -3,7 +3,8 @@ import axios from "axios";
 import Loader from "./Loader";
 // Default values shown
 import { FiEdit } from "react-icons/fi";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { generateRandomString } from "@/app/dashboard/page";
 import {
   Dialog,
   DialogContent,
@@ -23,6 +24,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { SearchArrayDataProvider } from "./SearchArrayProvider";
 
 const UpdateModal = ({
   name,
@@ -33,6 +35,7 @@ const UpdateModal = ({
   category,
   id,
 }) => {
+  const { setRootFlag } = useContext(SearchArrayDataProvider);
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [updateData, setUpdateData] = useState({
@@ -81,6 +84,8 @@ const UpdateModal = ({
       });
 
       setLoading(false);
+      const randomData = generateRandomString();
+      setRootFlag(randomData);
     } catch (e) {
       alert(e.message);
     }

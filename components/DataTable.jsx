@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import Loader from "./Loader";
 import { FaRegUser } from "react-icons/fa6";
 import { Checkbox } from "@/components/ui/checkbox";
+import { generateRandomString } from "@/app/dashboard/page";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -41,6 +42,7 @@ const DataTable = ({
   handleDelete,
   handleUnlockCertificate,
 }) => {
+  const { setRootFlag } = useContext(SearchArrayDataProvider);
   const { toast } = useToast();
   const [checkedUsers, setCheckedUsers] = useState([]);
   const [unlockLoading, setUnlockLoading] = useState(false);
@@ -77,6 +79,8 @@ const DataTable = ({
         }
       ); // Update your API route accordingly
       setUnlockLoading(false);
+      const randomData = generateRandomString();
+      setRootFlag(randomData);
       toast({
         title: "Selected Trainees has been passed",
         description: "Friday, February 10, 2023 at 5:57 PM",
@@ -180,6 +184,7 @@ const DataTable = ({
                         <DropdownMenuTrigger className="text-xl">
                           <CiMenuKebab />
                         </DropdownMenuTrigger>
+
                         <DropdownMenuContent>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem>

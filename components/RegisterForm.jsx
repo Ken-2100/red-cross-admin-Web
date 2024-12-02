@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import CameraCapture from "./CameraCapture";
 import { useToast } from "@/components/hooks/use-toast";
 import { SearchArrayDataProvider } from "./SearchArrayProvider";
+import { generateRandomString } from "@/app/dashboard/page";
 import {
   Dialog,
   DialogContent,
@@ -91,7 +92,7 @@ const RegisterForm = ({
           title: "Registration Success!",
           description: "Successfully Registered Trainee",
         });
-        const randomData = Math.random();
+        const randomData = generateRandomString();
         users.setRootFlag(randomData);
 
         setLoading(false);

@@ -1,28 +1,17 @@
-'use client'
+"use client";
 
-import { createContext,useState } from "react";
+import { createContext, useState } from "react";
 
+export const SideNavigationProvider = createContext(null);
 
-export const  SideNavigationProvider = createContext(null);
+const SideNavigationProviderComponent = ({ children }) => {
+  const [navigation, setNavigation] = useState("form");
 
-
-
-
-
-const SideNavigationProviderComponent = ({children}) => {
-
-
-    const [navigation,setNavigation] = useState('form');
-
-    return (
-        <SideNavigationProvider.Provider value={{navigation,setNavigation}}>
-
-            {children}
-        
-        
-        </SideNavigationProvider.Provider>
-    )
-
-}
+  return (
+    <SideNavigationProvider.Provider value={{ navigation, setNavigation }}>
+      {children}
+    </SideNavigationProvider.Provider>
+  );
+};
 
 export default SideNavigationProviderComponent;

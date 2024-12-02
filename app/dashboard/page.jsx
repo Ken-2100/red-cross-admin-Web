@@ -1,22 +1,22 @@
 "use client";
 
 import { useState, useEffect, useContext } from "react";
-import Image from "next/image";
 import RegisterForm from "@/components/RegisterForm";
 import DataTable from "@/components/DataTable";
 import Archives from "@/components/Archives";
 import axios from "axios";
-import Link from "next/link";
-import { RiUploadCloud2Fill } from "react-icons/ri";
+
 import { SideNavigationProvider } from "@/components/SideNavigationProvider";
 import Analytics from "@/components/Analytics";
 import InstructorsPage from "@/components/InstructorsPage";
-import SearchArrayProvider from "@/components/SearchArrayProvider";
+import { SearchArrayDataProvider } from "@/components/SearchArrayProvider";
 import UploadCerts from "@/components/UploadCerts";
+export const generateRandomString = () => {
+  return Math.random().toString(36).substring(2, 15);
+};
 const Dashboard = () => {
   const navigationData = useContext(SideNavigationProvider);
-  const usersFlag = useContext(SearchArrayProvider);
-
+  const { setRootFlag } = useContext(SearchArrayDataProvider);
   const [searchData, setSearchData] = useState("");
   const [unlockCertificate, setUnlockCertificate] = useState(false);
   const [flag, setFlag] = useState("");
@@ -32,6 +32,9 @@ const Dashboard = () => {
 
       if (response.status === 200) {
         alert("User deleted successfully!");
+
+        const randomData = generateRandomString();
+        setRootFlag(randomData);
       } else {
         alert("Failed to delete user. Please try again.");
       }

@@ -41,8 +41,8 @@ export default function RootLayout({ children }) {
         />
 
         <Providers>
-          <SearchArrayProvider>
-            <SideNavigationProviderComponent>
+          <SideNavigationProviderComponent>
+            <SearchArrayProvider>
               <div className="flex justify-between items-center w-full">
                 <Sidebar />
 
@@ -52,14 +52,13 @@ export default function RootLayout({ children }) {
 
                     <ProfileDropDown />
                   </div>
-
                   {children}
                 </div>
               </div>
 
               <Toaster />
-            </SideNavigationProviderComponent>
-          </SearchArrayProvider>
+            </SearchArrayProvider>
+          </SideNavigationProviderComponent>
         </Providers>
       </body>
     </html>
