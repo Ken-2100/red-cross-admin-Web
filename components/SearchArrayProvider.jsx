@@ -12,10 +12,21 @@ const SearchArrayProvider = ({ children }) => {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const usersData = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`,
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            cache: "no-store", // Ensures no caching occurs
+            next: { revalidate: 0 }, // Ensures immediate revalidation (specific to Next.js)
+          }
         );
-        const data = usersData.data;
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
         setUsers(data);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -24,6 +35,7 @@ const SearchArrayProvider = ({ children }) => {
 
     getUsers();
   }, [users]);
+
   // ken remove user in dependency
   const notAdminUsers = users.filter(
     (val) => val.userType !== "admin" && val.certificatedApproved === false
