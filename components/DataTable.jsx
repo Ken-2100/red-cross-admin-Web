@@ -54,6 +54,7 @@ const DataTable = ({
   const users = useContext(SearchArrayDataProvider);
 
   console.log("users", users);
+  console.log("rootFlag", users.rootFlag);
 
   const handleCheckboxChange = (user, isChecked) => {
     let newCheckedUsers = [...checkedUsers];

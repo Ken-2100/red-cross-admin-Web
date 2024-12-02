@@ -75,6 +75,7 @@ const SearchArrayProvider = ({ children }) => {
         searchDataArchives,
         setSearchDataArchives,
         setRootFlag,
+        rootFlag,
       }}
     >
       {children}
