@@ -1,6 +1,5 @@
 "use client";
 import { createContext, useState, useEffect } from "react";
-import axios from "axios";
 
 export const SearchArrayDataProvider = createContext(null);
 
@@ -9,6 +8,8 @@ const SearchArrayProvider = ({ children }) => {
   const [searchData, setSearchData] = useState("");
   const [searchDataArchives, setSearchDataArchives] = useState("");
   const [rootFlag, setRootFlag] = useState("");
+
+  // Fetch users when the component mounts
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -34,19 +35,19 @@ const SearchArrayProvider = ({ children }) => {
     };
 
     getUsers();
-  }, [users]);
+  }, []); // Only runs on mount
 
-  // ken remove user in dependency
+  // Filter users based on the current data
   const notAdminUsers = users.filter(
     (val) => val.userType !== "admin" && val.certificatedApproved === false
   );
+
   const graudatedUsers = users.filter(
     (val) => val.certificatedApproved === true
   );
 
   const finalUsers = notAdminUsers.filter((val) => {
     const lowercaseSearch = searchData.toLowerCase();
-    // Check if the name or any other data fields contain the search query
     return Object.values(val).some(
       (field) =>
         typeof field === "string" &&
@@ -56,7 +57,6 @@ const SearchArrayProvider = ({ children }) => {
 
   const archivedUsers = graudatedUsers.filter((val) => {
     const lowercaseSearch = searchDataArchives.toLowerCase();
-    // Check if the name or any other data fields contain the search query
     return Object.values(val).some(
       (field) =>
         typeof field === "string" &&
