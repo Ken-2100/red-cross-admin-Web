@@ -9,33 +9,25 @@ const SearchArrayProvider = ({ children }) => {
   const [searchDataArchives, setSearchDataArchives] = useState("");
   const [rootFlag, setRootFlag] = useState("");
 
-  // Fetch users when the component mounts
   useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`,
-          {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            cache: "no-store", // Ensures no caching occurs
-            next: { revalidate: 0 }, // Ensures immediate revalidation (specific to Next.js)
-          }
-        );
+    const eventSource = new EventSource(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/stream`
+    );
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setUsers(data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
+    eventSource.onmessage = (event) => {
+      const updatedData = JSON.parse(event.data);
+      setUsers(updatedData);
     };
 
-    getUsers();
-  }, []); // Only runs on mount
+    eventSource.onerror = (error) => {
+      console.error("SSE error:", error);
+      eventSource.close(); // Optionally close on error
+    };
+
+    return () => {
+      eventSource.close();
+    };
+  }, []);
 
   // Filter users based on the current data
   const notAdminUsers = users.filter(
