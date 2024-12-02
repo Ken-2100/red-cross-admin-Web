@@ -11,33 +11,38 @@ const SearchArrayProvider = ({ children }) => {
   console.log("outside flag", rootFlag);
   // Fetch users when the component mounts
   useEffect(() => {
-    console.log("Useffect flag", rootFlag);
-    const getUsers = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`,
-          {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            cache: "no-store", // Ensures no caching occurs
-            next: { revalidate: 0 }, // Ensures immediate revalidation (specific to Next.js)
-          }
-        );
+    const ws = new WebSocket$(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`
+    );
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+    ws.onopen = () => {
+      console.log("WebSocket connected");
+      setStatus("Connected");
+    };
 
-        const data = await response.json();
-        setUsers(data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
+    ws.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      console.log("Received message:", message);
+
+      if (message.type === "update") {
+        setUsers(message.data);
       }
     };
 
-    getUsers();
-  }); // Only runs on mount
+    ws.onclose = () => {
+      console.log("WebSocket disconnected");
+      setStatus("Disconnected");
+    };
 
+    ws.onerror = (error) => {
+      console.error("WebSocket error:", error);
+    };
+
+    // Cleanup on component unmount
+    return () => {
+      ws.close();
+    };
+  }, []);
   // Filter users based on the current data
   const notAdminUsers = users.filter(
     (val) => val.userType !== "admin" && val.certificatedApproved === false
