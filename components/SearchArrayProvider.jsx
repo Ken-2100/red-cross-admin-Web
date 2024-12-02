@@ -36,7 +36,7 @@ const SearchArrayProvider = ({ children }) => {
     };
 
     getUsers();
-  }, [rootFlag]); // Only runs on mount
+  }); // Only runs on mount
 
   // Filter users based on the current data
   const notAdminUsers = users.filter(
