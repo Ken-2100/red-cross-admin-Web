@@ -3,6 +3,7 @@ import { createContext, useState, useEffect } from "react";
 
 export const SearchArrayDataProvider = createContext(null);
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 const SearchArrayProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
@@ -22,7 +23,6 @@ const SearchArrayProvider = ({ children }) => {
             method: "GET",
             headers: { "Content-Type": "application/json" },
             cache: "no-store", // Ensures no caching occurs
-            next: { revalidate: 0 }, // Ensures immediate revalidation (specific to Next.js)
           }
         );
 
