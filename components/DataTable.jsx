@@ -36,6 +36,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useEffect } from "react";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 const DataTable = ({
   setUpdate,
   setUpdateId,
