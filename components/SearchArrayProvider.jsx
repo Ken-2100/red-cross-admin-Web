@@ -2,6 +2,7 @@
 import { createContext, useState, useEffect } from "react";
 
 export const SearchArrayDataProvider = createContext(null);
+export const dynamic = "force-dynamic";
 
 const SearchArrayProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
@@ -9,6 +10,7 @@ const SearchArrayProvider = ({ children }) => {
   const [searchDataArchives, setSearchDataArchives] = useState("");
   const [rootFlag, setRootFlag] = useState("");
   console.log("out flag", rootFlag);
+
   // Fetch users when the component mounts
   useEffect(() => {
     console.log("Useffect flag", rootFlag);
