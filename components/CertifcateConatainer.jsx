@@ -189,7 +189,7 @@ const CertificateContainer = ({
         </div>
       </div>
       {/* Footer Section */}
-      <div
+      {/* <div
         style={{
           width: "100%",
           height: "75px",
@@ -205,7 +205,7 @@ const CertificateContainer = ({
         <p style={{ color: "white", fontSize: "16px", fontStyle: "italic" }}>
           Always First, Always Ready, Always There!
         </p>
-      </div>
+      </div> */}
     </div>
   );
 };

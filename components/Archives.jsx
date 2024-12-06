@@ -27,6 +27,7 @@ const Archives = () => {
   const [deleteLoader, setDeleteLoader] = useState(false);
   const [openDetailsModal, setOpenDetailsModal] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const { archivedUsers } = useContext(SearchArrayDataProvider);
 
   const graudatedUsers = useContext(SearchArrayDataProvider);
   const groupedUsers = groupByDate(graudatedUsers.archivedUsers);
@@ -92,6 +93,14 @@ const Archives = () => {
       })
       .catch((e) => alert(e.message));
   };
+  // const archivedUsers = graudatedUsers.filter((val) => {
+  //   const lowercaseSearch = searchDataArchives.toLowerCase();
+  //   return Object.values(val).some(
+  //     (field) =>
+  //       typeof field === "string" &&
+  //       field.toLowerCase().includes(lowercaseSearch)
+  //   );
+  // });
 
   return (
     <div className="w-full gap-5 p-4">
@@ -100,9 +109,9 @@ const Archives = () => {
         <SearchByDateArchives />
         <h2 className="flex items-center gap-2">
           <FaRegUser />
-
-          <strong>{graudatedUsers.archivedUsers.length}</strong>
-          {graudatedUsers.archivedUsers.length === 1
+          <strong>{archivedUsers.length}</strong>
+          {/* <strong>{graudatedUsers.archivedUsers.length}</strong> */}
+          {archivedUsers.length === 1
             ? "Graduated Trainee"
             : "Graduated Trainees"}
         </h2>
@@ -137,12 +146,12 @@ const Archives = () => {
                       className="text-lg  gap-2 bg-transparent border-none outline-none"
                       onClick={() =>
                         downloadGroupDataAsPDF(group.users, [
+                          "Or Number",
                           "Name",
                           "Email",
                           "Category",
                           "Date Started",
                           "Location",
-                          "Or Number",
                           "Gender",
                           "Contact Number",
                         ])

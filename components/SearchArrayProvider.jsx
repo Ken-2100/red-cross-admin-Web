@@ -58,13 +58,13 @@ const SearchArrayProvider = ({ children }) => {
     );
   });
 
-  const archivedUsers = graudatedUsers.filter((val) => {
-    const lowercaseSearch = searchDataArchives.toLowerCase();
-    return Object.values(val).some(
-      (field) =>
-        typeof field === "string" &&
-        field.toLowerCase().includes(lowercaseSearch)
-    );
+  const archivedUserss = graudatedUsers.filter((val) => {
+    // Match by selected date in MM/DD/YYYY format
+    if (searchDataArchives) {
+      const userDate = new Date(val.dateEnded).toLocaleDateString(); // Format user date
+      return userDate === searchDataArchives;
+    }
+    return true; // Include all users if no date filter is applied
   });
 
   return (
@@ -73,7 +73,7 @@ const SearchArrayProvider = ({ children }) => {
         finalUsers,
         searchData,
         setSearchData,
-        archivedUsers,
+        archivedUserss,
         searchDataArchives,
         setSearchDataArchives,
         setRootFlag,
