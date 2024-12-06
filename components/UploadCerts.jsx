@@ -132,7 +132,6 @@ const UploadCerts = () => {
       alert("Please enter a valid instructor name.");
     }
   };
-
   const handleRemoveInstructor = (index) => {
     setIntstructors((prev) => prev.filter((_, i) => i !== index));
   };
@@ -322,12 +321,6 @@ const UploadCerts = () => {
                 </li>
               ))}
             </ul>
-          </div>
-          <div>
-            <h1>
-              <strong>Date Of Evaluation</strong>
-            </h1>
-            <div></div>
           </div>
           <div className="relative inline-block group">
             <div className="flex w-full flex-col gap-2">
