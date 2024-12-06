@@ -18,7 +18,7 @@ const SearchArrayProvider = ({ children }) => {
     const getUsers = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`,
+          ` ${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user`,
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -58,13 +58,13 @@ const SearchArrayProvider = ({ children }) => {
     );
   });
 
-  const archivedUserss = graudatedUsers.filter((val) => {
-    // Match by selected date in MM/DD/YYYY format
-    if (searchDataArchives) {
-      const userDate = new Date(val.dateEnded).toLocaleDateString(); // Format user date
-      return userDate === searchDataArchives;
-    }
-    return true; // Include all users if no date filter is applied
+  const archivedUsers = graudatedUsers.filter((val) => {
+    const lowercaseSearch = searchDataArchives.toLowerCase();
+    return Object.values(val).some(
+      (field) =>
+        typeof field === "string" &&
+        field.toLowerCase().includes(lowercaseSearch)
+    );
   });
 
   return (
@@ -73,7 +73,7 @@ const SearchArrayProvider = ({ children }) => {
         finalUsers,
         searchData,
         setSearchData,
-        archivedUserss,
+        archivedUsers,
         searchDataArchives,
         setSearchDataArchives,
         setRootFlag,
