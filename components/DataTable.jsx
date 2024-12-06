@@ -197,11 +197,11 @@ const DataTable = ({
                           <DropdownMenuItem>
                             <Link href={`/assessment/${val.id}`}>Assess</Link>
                           </DropdownMenuItem>
-                          <DropdownMenuItem>
+                          {/* <DropdownMenuItem>
                             <Link href={`/assessment/score/${val.id}`}>
                               View Score
                             </Link>
-                          </DropdownMenuItem>
+                          </DropdownMenuItem> */}
 
                           <DropdownMenuItem>
                             <button
