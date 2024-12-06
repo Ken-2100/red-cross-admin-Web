@@ -27,9 +27,15 @@ const Archives = () => {
   const [deleteLoader, setDeleteLoader] = useState(false);
   const [openDetailsModal, setOpenDetailsModal] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [filterDate, setFilterDate] = useState("");
 
   const graudatedUsers = useContext(SearchArrayDataProvider);
   const groupedUsers = groupByDate(graudatedUsers.archivedUsers);
+
+  const filteredGroups = groupedUsers.filter((group) => {
+    if (!filterDate) return true; // Show all groups if no filter
+    return group.date === filterDate; // Compare with group.date
+  });
 
   const handleOpenDetailsModal = (user) => {
     setCurrentUser(user);
@@ -97,6 +103,7 @@ const Archives = () => {
     <div className="w-full gap-5 p-4">
       <div className="flex justify-between items-center w-full mb-5">
         <h2>List of Graduates</h2>
+
         <SearchByDateArchives />
         <h2 className="flex items-center gap-2">
           <FaRegUser />
