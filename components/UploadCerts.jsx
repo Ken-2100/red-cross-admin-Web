@@ -24,17 +24,26 @@ const UploadCerts = () => {
   });
 
   const validUntil = selectedData?.dateStarted
-    ? new Intl.DateTimeFormat("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }).format(
-        new Date(
-          new Date(selectedData.dateStarted).setFullYear(
-            new Date(selectedData.dateStarted).getFullYear() + 2
-          )
-        )
-      )
+    ? (() => {
+        const startDate = new Date(selectedData.dateStarted);
+
+        // Add days based on the category
+        if (selectedData.category === "occupational") {
+          startDate.setDate(startDate.getDate() + 1);
+        } else if (selectedData.category === "standard") {
+          startDate.setDate(startDate.getDate() + 3);
+        }
+
+        // Add 2 years to the adjusted start date
+        startDate.setFullYear(startDate.getFullYear() + 2);
+
+        // Format the final date
+        return new Intl.DateTimeFormat("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }).format(startDate);
+      })()
     : "No Date";
 
   const formattedDateStarted = selectedData?.dateStarted

@@ -8,7 +8,7 @@ const poppins = Poppins({
 
 export const metadata = {
   title: "Red Cross Cavite",
-  description: "sample description",
+  description: "Red Cross Admin system",
 };
 export default function RootLayout({ children }) {
   return (

@@ -103,17 +103,25 @@ const Archives = () => {
     <div className="w-full gap-5 p-4">
       <div className="flex justify-between items-center w-full mb-5">
         <h2>List of Graduates</h2>
-
-        <SearchByDateArchives />
+        <SearchByDateArchives onDateChange={setFilterDate} />{" "}
+        {/* Pass the handler */}
         <h2 className="flex items-center gap-2">
           <FaRegUser />
-
-          <strong>{graudatedUsers.archivedUsers.length}</strong>
-          {graudatedUsers.archivedUsers.length === 1
+          <strong>
+            {filteredGroups.reduce((sum, group) => sum + group.users.length, 0)}
+          </strong>
+          {filteredGroups.reduce(
+            (sum, group) => sum + group.users.length,
+            0
+          ) === 1
             ? "Graduated Trainee"
             : "Graduated Trainees"}
         </h2>
       </div>
+      {/* THIS IS TO LINE: 120  <strong>{graudatedUsers.archivedUsers.length}</strong>
+          {graudatedUsers.archivedUsers.length === 1
+            ? "Graduated Trainee"
+            : "Graduated Trainees"} */}
 
       <div className="w-full h-[450px] overflow-auto">
         <Table>
