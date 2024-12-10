@@ -150,9 +150,39 @@ const UpdateModal = ({
                 <SelectValue placeholder="Select Location" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Manila">Manila</SelectItem>
-                <SelectItem value="Cavite">Cavite</SelectItem>
-                <SelectItem value="Pasay">Pasay</SelectItem>
+                <SelectItem value="ALFONSO">ALFONSO</SelectItem>
+                <SelectItem value="AMADEO">AMADEO</SelectItem>
+                <SelectItem value="BACOOR CITY">BACOOR CITY</SelectItem>
+                <SelectItem value="CARMONA">CARMONA</SelectItem>
+                <SelectItem value="CAVITE CITY">CAVITE CITY</SelectItem>
+                <SelectItem value="CITY OF DASMARIÑAS">
+                  CITY OF DASMARIÑAS
+                </SelectItem>
+                <SelectItem value="GEN. MARIANO ALVAREZ">
+                  GEN. MARIANO ALVAREZ
+                </SelectItem>
+                <SelectItem value="GENERAL EMILIO AGUINALDO">
+                  GENERAL EMILIO AGUINALDO
+                </SelectItem>
+                <SelectItem value="GENERAL TRIAS">GENERAL TRIAS</SelectItem>
+                <SelectItem value="IMUS CITY">IMUS CITY</SelectItem>
+                <SelectItem value="INDANG">INDANG</SelectItem>
+                <SelectItem value="KAWIT">KAWIT</SelectItem>
+                <SelectItem value="MAGALLANES">MAGALLANES</SelectItem>
+                <SelectItem value="MARAGONDON">MARAGONDON</SelectItem>
+                <SelectItem value="MENDEZ (MENDEZ-NUÑEZ)">
+                  MENDEZ (MENDEZ-NUÑEZ)
+                </SelectItem>
+                <SelectItem value="NAIC ">NAIC</SelectItem>
+                <SelectItem value="NOVELETA">NOVELETA</SelectItem>
+                <SelectItem value="ROSARIO ">ROSARIO </SelectItem>
+                <SelectItem value="SILANG">SILANG</SelectItem>
+                <SelectItem value="TAGAYTAY CITY">TAGAYTAY CITY</SelectItem>
+                <SelectItem value="TANZA ">TANZA </SelectItem>
+                <SelectItem value="TERNATE">TERNATE</SelectItem>
+                <SelectItem value="TRECE MARTIRES CITY (CAPITAL)">
+                  TRECE MARTIRES CITY (CAPITAL)
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
